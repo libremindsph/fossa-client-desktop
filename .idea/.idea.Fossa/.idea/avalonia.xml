@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Fossa.Client.Desktop/App.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
+        <entry key="Fossa.Client.Desktop/MainWindow.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
+        <entry key="Fossa.Client.Desktop/Views/Pages/Chat.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
+        <entry key="Fossa.Client.Desktop/Views/Windows/Main.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
+        <entry key="Fossa.Client.Desktop/Views/Windows/MainWindow.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
