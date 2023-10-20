@@ -12,6 +12,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fossa.Client.Desktop", "Fos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fossa.Configuration", "Fossa.Configuration\Fossa.Configuration.csproj", "{E507FC27-28DC-4431-BF90-2CB2F88A5893}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3352EF0F-4D01-4EEC-B7EB-3D4BD9DC6B55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fossa.Tests", "Fossa.Tests\Fossa.Tests.csproj", "{908CC848-52E0-49D9-B158-076630A92A71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +27,7 @@ Global
 		{C9B7B948-3597-467C-842E-6E568CF8021F} = {7D5EDD88-31C4-4E52-8F42-7A45D06DA798}
 		{4FDF74BF-52F5-455F-958D-3CB3E6F0D0E0} = {7D5EDD88-31C4-4E52-8F42-7A45D06DA798}
 		{E507FC27-28DC-4431-BF90-2CB2F88A5893} = {7D5EDD88-31C4-4E52-8F42-7A45D06DA798}
+		{908CC848-52E0-49D9-B158-076630A92A71} = {3352EF0F-4D01-4EEC-B7EB-3D4BD9DC6B55}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{BF7D8FF1-F4C8-454F-BB9C-5B35B879EC10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -45,5 +50,9 @@ Global
 		{E507FC27-28DC-4431-BF90-2CB2F88A5893}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E507FC27-28DC-4431-BF90-2CB2F88A5893}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E507FC27-28DC-4431-BF90-2CB2F88A5893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{908CC848-52E0-49D9-B158-076630A92A71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{908CC848-52E0-49D9-B158-076630A92A71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{908CC848-52E0-49D9-B158-076630A92A71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{908CC848-52E0-49D9-B158-076630A92A71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
