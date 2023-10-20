@@ -12,15 +12,16 @@
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="11.0.5" />
         <PackageReference Include="Avalonia.Desktop" Version="11.0.5" />
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.4" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.5" />
         <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.5" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5" />
-    </ItemGroup>
-
-
-    <ItemGroup>
-      <Folder Include="ViewModels\" />
+        <PackageReference Include="fluentavaloniaui" Version="2.0.4" />
+        <PackageReference Include="MvvmGen.PureCodeGeneration" Version="1.2.1">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="StrongInject" Version="1.4.4" />
     </ItemGroup>
 
 
