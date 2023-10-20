@@ -7,8 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="llamasharp" Version="0.5.1" />
-      <PackageReference Include="LLamaSharp.Backend.Cpu" Version="0.5.1" />
+      <PackageReference Include="Russkyc.Configuration" Version="1.0.1" />
     </ItemGroup>
 
 </Project>
