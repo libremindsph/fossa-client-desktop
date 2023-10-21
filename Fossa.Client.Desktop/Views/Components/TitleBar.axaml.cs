@@ -1,4 +1,4 @@
-// MIT License
+﻿// MIT License
 // 
 // Copyright (c) 2023 Libre Minds
 // 
@@ -20,20 +20,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using Avalonia;
 using Avalonia.Controls;
-using Fossa.Client.Desktop.ViewModels;
+using Avalonia.Markup.Xaml;
 
-namespace Fossa.Client.Desktop.Views.Windows;
+namespace Fossa.Client.Desktop.Views.Components;
 
-public partial class Main : Window
+public partial class TitleBar : UserControl
 {
-    public Main()
+    public TitleBar()
     {
-        InitializeComponent();
-    }
-    public Main(AppViewModel vm)
-    {
-        DataContext = vm;
         InitializeComponent();
     }
 }

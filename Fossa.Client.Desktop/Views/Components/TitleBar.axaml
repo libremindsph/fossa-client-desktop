@@ -1,0 +1,24 @@
+﻿<UserControl
+    x:Class="Fossa.Client.Desktop.Views.Components.TitleBar"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Margin="8">
+        <Grid IsHitTestVisible="False" />
+        <Grid HorizontalAlignment="Stretch">
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                <Border
+                    Width="18"
+                    Height="18"
+                    Background="{DynamicResource AccentButtonBackground}"
+                    CornerRadius="15" />
+                <TextBlock
+                    Margin="6,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="Fossa AI" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

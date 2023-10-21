@@ -1,4 +1,4 @@
-// MIT License
+﻿// MIT License
 // 
 // Copyright (c) 2023 Libre Minds
 // 
@@ -21,19 +21,14 @@
 // SOFTWARE.
 
 using Avalonia.Controls;
-using Fossa.Client.Desktop.ViewModels;
 
-namespace Fossa.Client.Desktop.Views.Windows;
+namespace Fossa.Client.Desktop.Views.Components;
 
-public partial class Main : Window
+public partial class ChatView : UserControl
 {
-    public Main()
+    public ChatView()
     {
         InitializeComponent();
     }
-    public Main(AppViewModel vm)
-    {
-        DataContext = vm;
-        InitializeComponent();
-    }
+
 }

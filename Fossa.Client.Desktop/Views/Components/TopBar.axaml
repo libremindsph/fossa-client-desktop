@@ -1,0 +1,39 @@
+﻿<UserControl
+    x:Class="Fossa.Client.Desktop.Views.Components.TopBar"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:Fossa.Client.Desktop.ViewModels"
+    d:DesignWidth="500"
+    x:DataType="viewModels:AppViewModel"
+    mc:Ignorable="d">
+    <Design.DataContext>
+        <viewModels:AppViewModel />
+    </Design.DataContext>
+    <Grid>
+        <Button Margin="12,0,0,0" Command="{Binding OpenModelManagerCommand}">
+            <StackPanel Orientation="Horizontal">
+                <controls:SymbolIcon FontSize="16" Symbol="Repair" />
+                <TextBlock
+                    Margin="4,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="Manage Models" />
+            </StackPanel>
+        </Button>
+        <StackPanel
+            Margin="0,8"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" Text="You are talking to" />
+            <ComboBox
+                Margin="8,0,12,0"
+                HorizontalAlignment="Right"
+                SelectedIndex="0">
+                <ComboBoxItem>Llama 7B</ComboBoxItem>
+                <ComboBoxItem>Llama 13B</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

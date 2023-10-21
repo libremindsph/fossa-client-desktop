@@ -2,14 +2,33 @@
     x:Class="Fossa.Client.Desktop.Views.Windows.Main"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="clr-namespace:Fossa.Client.Desktop.Views.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:Fossa.Client.Desktop.Views.Pages"
+    xmlns:viewModels="clr-namespace:Fossa.Client.Desktop.ViewModels"
     xmlns:windowing="clr-namespace:FluentAvalonia.UI.Windowing;assembly=FluentAvalonia"
     Title="Fossa.Client.Desktop"
+    Width="600"
+    MinWidth="400"
+    MinHeight="500"
     d:DesignHeight="450"
-    d:DesignWidth="800"
-    ExtendClientAreaToDecorationsHint="True"
+    x:DataType="viewModels:AppViewModel"
+    ExtendClientAreaToDecorationsHint="{Binding IsOnWindows}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <ContentControl />
+    <Design.DataContext>
+        <viewModels:ChatViewModel />
+    </Design.DataContext>
+    <Grid RowDefinitions="Auto,Auto,*">
+        <components:TitleBar Grid.Row="0" IsVisible="{Binding IsOnWindows}" />
+        <components:TopBar Grid.Row="1" DataContext="{Binding}" />
+        <ContentPresenter Grid.Row="2" Content="{Binding PageContext}">
+            <ContentPresenter.ContentTemplate>
+                <DataTemplate>
+                    <pages:ChatPage />
+                </DataTemplate>
+            </ContentPresenter.ContentTemplate>
+        </ContentPresenter>
+    </Grid>
 </windowing:AppWindow>

@@ -1,0 +1,33 @@
+﻿<UserControl
+    x:Class="Fossa.Client.Desktop.Views.Components.PromptBar"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignWidth="400"
+    Background="{DynamicResource SystemControlBackgroundChromeBlackLowBrush}"
+    mc:Ignorable="d">
+    <Grid Margin="12" ColumnDefinitions="*,80">
+        <TextBox
+            Grid.Column="0"
+            MaxHeight="200"
+            VerticalAlignment="Center"
+            AcceptsReturn="True"
+            Watermark="Ask Anything.." />
+        <Button
+            Grid.Column="1"
+            Margin="8,0,0,0"
+            Padding="6"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                    Margin="0,0,4,0"
+                    VerticalAlignment="Center"
+                    Text="Send" />
+                <controls:SymbolIcon FontSize="16" Symbol="Send" />
+            </StackPanel>
+        </Button>
+    </Grid>
+</UserControl>

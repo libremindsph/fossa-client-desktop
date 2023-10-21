@@ -1,0 +1,65 @@
+﻿<UserControl
+    x:Class="Fossa.Client.Desktop.Views.Components.ChatView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:entities="clr-namespace:Fossa.Client.Desktop.Conversation.Entities"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:Fossa.Client.Desktop.ViewModels"
+    d:DesignWidth="400"
+    x:DataType="viewModels:ChatViewModel"
+    mc:Ignorable="d">
+    <Design.DataContext>
+        <viewModels:ChatViewModel />
+    </Design.DataContext>
+    <ScrollViewer AllowAutoHide="True">
+        <ItemsControl ItemsSource="{Binding ConversationItems}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.DataTemplates>
+                <DataTemplate DataType="{x:Type entities:BotMessage}">
+                    <Border
+                        MaxWidth="700"
+                        Margin="12,12,100,12"
+                        Padding="12"
+                        HorizontalAlignment="Left"
+                        Background="{DynamicResource AccentButtonBackground}"
+                        CornerRadius="7">
+                        <Grid>
+                            <TextBlock Text="{Binding Message}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type entities:UserMessage}">
+                    <Border
+                        MaxWidth="700"
+                        Margin="100,12,12,12"
+                        Padding="12"
+                        HorizontalAlignment="Right"
+                        Background="{DynamicResource SystemControlPageBackgroundBaseLowBrush}"
+                        CornerRadius="7">
+                        <Grid>
+                            <TextBlock Text="{Binding Message}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type entities:ClearContextMessage}">
+                    <Grid
+                        Margin="40,12"
+                        HorizontalAlignment="Stretch">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            FontWeight="Light"
+                            Foreground="{DynamicResource SystemControlBackgroundListMediumBrush}"
+                            Text="{Binding Message}"
+                            TextAlignment="Center" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.DataTemplates>
+        </ItemsControl>
+    </ScrollViewer>
+</UserControl>
