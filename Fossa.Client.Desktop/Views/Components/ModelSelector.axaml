@@ -5,12 +5,14 @@
     xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:Fossa.Client.Desktop.ViewModels"
     d:DesignHeight="450"
     d:DesignWidth="400"
+    x:DataType="viewModels:AppViewModel"
     Background="{DynamicResource SystemControlBackgroundChromeBlackLowBrush}"
     mc:Ignorable="d">
     <ScrollViewer>
-        <ItemsControl ItemsSource="123">
+        <ItemsControl ItemsSource="{Binding Models}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Background="{DynamicResource SystemControlBackgroundChromeBlackLowBrush}" />
@@ -29,25 +31,25 @@
                                 <TextBlock
                                     FontSize="16"
                                     FontWeight="Medium"
-                                    Text="LLaMA WizardLM 7B" />
+                                    Text="{Binding Name}" />
                                 <TextBlock
                                     Margin="0,4,0,0"
                                     FontSize="12"
                                     Foreground="#B4B4B4"
-                                    Text="Basic Prompts, Conversational" />
+                                    Text="{Binding Description}" />
                                 <StackPanel Margin="0,16,0,0" Orientation="Horizontal">
                                     <Border
                                         Padding="7,3"
                                         Background="{DynamicResource ButtonBackground}"
                                         CornerRadius="5">
-                                        <TextBlock FontSize="10" Text="7 Billion Parameters" />
+                                        <TextBlock FontSize="10" Text="{Binding ParameterSize}" />
                                     </Border>
                                     <Border
                                         Margin="6,0,0,0"
                                         Padding="7,3"
                                         Background="{DynamicResource ButtonBackground}"
                                         CornerRadius="5">
-                                        <TextBlock FontSize="10" Text="4GB" />
+                                        <TextBlock FontSize="10" Text="{Binding FileSize}" />
                                     </Border>
                                 </StackPanel>
                             </StackPanel>
