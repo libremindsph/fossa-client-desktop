@@ -8,7 +8,7 @@
     xmlns:pages="clr-namespace:Fossa.Client.Desktop.Views.Pages"
     xmlns:viewModels="clr-namespace:Fossa.Client.Desktop.ViewModels"
     xmlns:windowing="clr-namespace:FluentAvalonia.UI.Windowing;assembly=FluentAvalonia"
-    Title="Fossa.Client.Desktop"
+    Title="Fossa AI"
     Width="600"
     MinWidth="400"
     MinHeight="500"
