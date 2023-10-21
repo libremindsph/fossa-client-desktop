@@ -5,9 +5,16 @@
       <map>
         <entry key="Fossa.Client.Desktop/App.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
         <entry key="Fossa.Client.Desktop/MainWindow.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
+        <entry key="Fossa.Client.Desktop/Views/Components/ChatView.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
+        <entry key="Fossa.Client.Desktop/Views/Components/ModelSelector.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
+        <entry key="Fossa.Client.Desktop/Views/Components/PromptBar.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
+        <entry key="Fossa.Client.Desktop/Views/Components/TitleBar.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
+        <entry key="Fossa.Client.Desktop/Views/Components/TopBar.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
         <entry key="Fossa.Client.Desktop/Views/Pages/Chat.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
+        <entry key="Fossa.Client.Desktop/Views/Pages/ChatPage.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
         <entry key="Fossa.Client.Desktop/Views/Windows/Main.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
         <entry key="Fossa.Client.Desktop/Views/Windows/MainWindow.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
+        <entry key="Fossa.Client.Desktop/Views/Windows/ModelManager.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
       </map>
     </option>
   </component>
