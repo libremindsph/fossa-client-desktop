@@ -17,6 +17,9 @@
     ExtendClientAreaToDecorationsHint="{Binding IsOnWindows}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+    <Window.KeyBindings>
+        <KeyBinding Command="{Binding PageContext.StopGeneratingCommand}" Gesture="Ctrl+Shift+E" />
+    </Window.KeyBindings>
     <Design.DataContext>
         <viewModels:ChatViewModel />
     </Design.DataContext>

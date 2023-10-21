@@ -21,6 +21,9 @@
 // SOFTWARE.
 
 using Avalonia.Controls;
+using Avalonia.Threading;
+using CommunityToolkit.Mvvm.Messaging;
+using Fossa.Client.Desktop.Conversation.Events;
 
 namespace Fossa.Client.Desktop.Views.Components;
 
@@ -29,6 +32,11 @@ public partial class ChatView : UserControl
     public ChatView()
     {
         InitializeComponent();
+        WeakReferenceMessenger.Default.Register<ResponseChangedEvent>(this, OnResponseChanged);
     }
 
+    async void OnResponseChanged(object obj, ResponseChangedEvent callback)
+    {
+        await Dispatcher.UIThread.InvokeAsync(() => ChatViewScroller.ScrollToEnd());
+    }
 }

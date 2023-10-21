@@ -5,22 +5,33 @@
     xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:Fossa.Client.Desktop.ViewModels"
     d:DesignWidth="400"
+    x:DataType="viewModels:ChatViewModel"
     Background="{DynamicResource SystemControlBackgroundChromeBlackLowBrush}"
     mc:Ignorable="d">
     <Grid Margin="12" ColumnDefinitions="*,80">
         <TextBox
+            x:Name="PromptInputBox"
             Grid.Column="0"
             MaxHeight="200"
             VerticalAlignment="Center"
             AcceptsReturn="True"
-            Watermark="Ask Anything.." />
+            IsEnabled="{Binding CanSend}"
+            Text="{Binding Prompt, Mode=TwoWay}"
+            Watermark="Ask Anything.. (Use Ctrl+Enter for for new lines)">
+            <TextBox.KeyBindings>
+                <KeyBinding Command="{Binding ChatCommand}" Gesture="Enter" />
+            </TextBox.KeyBindings>
+        </TextBox>
         <Button
             Grid.Column="1"
             Margin="8,0,0,0"
             Padding="6"
             HorizontalAlignment="Stretch"
-            VerticalAlignment="Top">
+            VerticalAlignment="Top"
+            Command="{Binding ChatCommand}"
+            IsEnabled="{Binding CanSend}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock
                     Margin="0,0,4,0"

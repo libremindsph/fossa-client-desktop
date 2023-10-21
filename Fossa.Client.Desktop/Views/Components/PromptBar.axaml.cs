@@ -23,6 +23,9 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Threading;
+using CommunityToolkit.Mvvm.Messaging;
+using Fossa.Client.Desktop.Conversation.Events;
 
 namespace Fossa.Client.Desktop.Views.Components;
 
@@ -31,5 +34,13 @@ public partial class PromptBar : UserControl
     public PromptBar()
     {
         InitializeComponent();
+        WeakReferenceMessenger.Default.Register<ResponseChangedEvent>(this, OnResponseChanged);
+    }
+    async void OnResponseChanged(object obj, ResponseChangedEvent callback)
+    {
+        if (callback.Value)
+        {
+            await Dispatcher.UIThread.InvokeAsync(() => PromptInputBox.Focus());
+        }
     }
 }
