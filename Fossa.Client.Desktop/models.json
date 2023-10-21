@@ -1,0 +1,25 @@
+{
+  "llamaModel": [
+    {
+      "name": "Llama 2 7b (GGUF)",
+      "description": "Simple Tasks, Conversational",
+      "downloadSource": "https://huggingface.co/TheBloke/llama-2-7B-Guanaco-QLoRA-GGUF/resolve/main/llama-2-7b-guanaco-qlora.Q3_K_L.gguf",
+      "fileName": "llama-2-7b-guanaco-qlora.Q4_0.gguf",
+      "fileSize": "4GB",
+      "parameterSize" : "7 Billion",
+      "prompt": null,
+      "threads": 2,
+      "contextSize": 4096,
+      "perplexity": false,
+      "tfsZ": 0.25,
+      "topK": 40,
+      "topP": 1.0,
+      "typicalP": 1.0,
+      "temperature": 0.7,
+      "repeatPenalty": 1.0,
+      "frequencyPenalty": 0.42,
+      "presencePenalty": 0.3,
+      "sessionsDirectory": null
+    }
+  ]
+}
