@@ -20,6 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using Fossa.Client.Desktop.Configuration;
+using Fossa.Client.Desktop.Conversation.Factory;
+using Fossa.Client.Desktop.Models;
 using Fossa.Client.Desktop.Views.Windows;
 using StrongInject;
 using Fossa.Client.Desktop.ViewModels;
@@ -27,6 +30,10 @@ using Fossa.Client.Desktop.Views.Pages;
 
 namespace Fossa.Client.Desktop.Services;
 
+[Register<AppConfig>]
+[Register<LlamaClient>]
+[Register<MessageFactory>]
+[Register<ModelProvider>]
 [Register<ViewFactory>]
 [Register<AppViewModel>]
 [Register<ChatViewModel>]
