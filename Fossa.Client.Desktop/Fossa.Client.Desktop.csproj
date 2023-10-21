@@ -34,4 +34,14 @@
         <DependentUpon>TopBar.axaml</DependentUpon>
       </Compile>
     </ItemGroup>
+
+
+    <ItemGroup>
+      <None Update="models.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="appconfig.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
 </Project>
