@@ -20,45 +20,89 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Fossa.Client.Desktop.Conversation.Entities;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using Fossa.Client.Desktop.Conversation.Events;
+using Fossa.Client.Desktop.Conversation.Factory;
 using Fossa.Client.Desktop.Conversation.Interfaces;
+using Fossa.Client.Desktop.Models;
+using Fossa.Client.Desktop.Models.Entities;
 
 namespace Fossa.Client.Desktop.ViewModels;
 
 public partial class ChatViewModel : ObservableObject
 {
+    private readonly LlamaClient _llamaClient;
+    private readonly MessageFactory _messageFactory;
+
+    [ObservableProperty] private string _prompt = "";
+    [ObservableProperty] private bool _canSend = true;
+    [ObservableProperty] private LlamaModel? _model;
     [ObservableProperty] private ObservableCollection<IConversationItem> _conversationItems = new();
 
-    public ChatViewModel()
+    public ChatViewModel(
+        MessageFactory messageFactory,
+        LlamaClient llamaClient)
     {
-        int t = 0;
-        while (t < 20)
+        _messageFactory = messageFactory;
+        _llamaClient = llamaClient;
+    }
+
+    partial void OnModelChanged(LlamaModel? oldValue, LlamaModel? newValue)
+    {
+        if (newValue is null || oldValue! == newValue)
         {
-            var rand = new Random().Next(3);
-            ConversationItems.Add(
-                rand switch
-                {
-                    0 => new BotMessage
-                    {
-                        Message = "Bot Message"
-                    },
-                    1 => new ClearContextMessage
-                    {
-                        Message = "End of Context"
-                    },
-                    2 => new UserMessage
-                    {
-                        Message = "User Message"
-                    },
-                    _ => new UserMessage
-                    {
-                        Message = "User Message"
-                    }
-                });
-            t++;
+            return;
         }
+        Task.Run(async () =>
+        {
+            CanSend = false;
+            
+            await _llamaClient.LoadModelAsync(newValue);
+            await Task.Delay(1000);
+            
+            CanSend = true;
+            WeakReferenceMessenger.Default.Send(new ResponseChangedEvent(true));
+        });
+    }
+    
+    [RelayCommand]
+    private void StopGenerating()
+    {
+        _llamaClient.StopResponse();
+    }
+
+    [RelayCommand]
+    private async Task ChatAsync()
+    {
+        if (string.IsNullOrWhiteSpace(Prompt) || Prompt.Length < 2)
+        {
+            return;
+        }
+        
+        var prompt = Prompt;
+        var response = _messageFactory.CreateBotMessage();
+        
+        ConversationItems.Add(_messageFactory.CreateUserMessage(prompt));
+        ConversationItems.Add(response);
+
+        await Task.Run(async () =>
+        {
+            CanSend = false;
+            Prompt = string.Empty;
+            
+            await foreach (var text in _llamaClient.ChatAsync(prompt))
+            {
+                response.Message += text;
+                WeakReferenceMessenger.Default.Send(new ResponseChangedEvent(false));
+            }
+            
+            response.IsCurrent = false;
+            CanSend = true;
+            WeakReferenceMessenger.Default.Send(new ResponseChangedEvent(true));
+        });
     }
 }

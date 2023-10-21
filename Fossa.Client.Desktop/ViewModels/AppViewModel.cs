@@ -21,24 +21,43 @@
 // SOFTWARE.
 
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Fossa.Client.Desktop.Configuration;
+using Fossa.Client.Desktop.Extensions;
+using Fossa.Client.Desktop.Models;
+using Fossa.Client.Desktop.Models.Entities;
 using Fossa.Client.Desktop.Services;
+using JsonFlatFileDataStore;
 
 namespace Fossa.Client.Desktop.ViewModels;
 
 public partial class AppViewModel : ObservableObject
 {
+    private readonly AppConfig _appConfig;
     private readonly ViewFactory _viewFactory;
-    [ObservableProperty] private bool _isOnWindows;
-    [ObservableProperty] private ChatViewModel _pageContext;
 
-    public AppViewModel(ChatViewModel pageContext, ViewFactory viewFactory)
+    [ObservableProperty] private ChatViewModel _pageContext;
+    [ObservableProperty] private ObservableCollection<LlamaModel> _models = new();
+    [ObservableProperty] private bool _isOnWindows = Environment.OSVersion.Platform is PlatformID.Win32NT;
+
+    public AppViewModel(
+        ModelProvider modelProvider,
+        ChatViewModel pageContext,
+        ViewFactory viewFactory,
+        AppConfig appConfig)
     {
-        _viewFactory = viewFactory;
         PageContext = pageContext;
-        IsOnWindows = Environment.OSVersion.Platform is PlatformID.Win32NT;
+        _viewFactory = viewFactory;
+        _appConfig = appConfig;
+        Models = modelProvider.GetDownloadableModels().ToObservableCollection();
+        Task.Run(async () =>
+        {
+            await Task.Run(() => PageContext.Model = Models.FirstOrDefault());
+        });
     }
 
     [RelayCommand]

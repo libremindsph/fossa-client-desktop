@@ -20,13 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using CommunityToolkit.Mvvm.ComponentModel;
-using Fossa.Client.Desktop.Conversation.Interfaces;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
-namespace Fossa.Client.Desktop.Conversation.Entities;
+namespace Fossa.Client.Desktop.Extensions;
 
-public partial class UserMessage : ObservableObject, IConversationItem
+public static class CollectionExtensions
 {
-    [ObservableProperty] private string _message = "";
-    [ObservableProperty] private bool _isCurrent;
+    public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> collection) =>
+        new (collection);
 }

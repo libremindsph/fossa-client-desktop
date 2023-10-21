@@ -21,23 +21,20 @@
 // SOFTWARE.
 
 using System.Collections.Generic;
-using System.Linq;
-using Fossa.Client.Desktop.Configuration;
 using Fossa.Client.Desktop.Models.Entities;
+using JsonFlatFileDataStore;
 
 namespace Fossa.Client.Desktop.Models;
 
 public class ModelProvider
 {
-    private readonly AppConfig _config;
-
-    public ModelProvider(AppConfig config)
-    {
-        _config = config;
-    }
+    private readonly IDocumentCollection<LlamaModel> _dataStore = new DataStore("models.json").GetCollection<LlamaModel>();
 
     public IEnumerable<LlamaModel> GetDownloadableModels()
     {
-        return Enumerable.Empty<LlamaModel>();
+        foreach (var llamaModel in _dataStore.AsQueryable())
+        {
+            yield return llamaModel;
+        }
     }
 }

@@ -20,13 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using CommunityToolkit.Mvvm.ComponentModel;
+using Fossa.Client.Desktop.Conversation.Entities;
 using Fossa.Client.Desktop.Conversation.Interfaces;
 
-namespace Fossa.Client.Desktop.Conversation.Entities;
+namespace Fossa.Client.Desktop.Conversation.Factory;
 
-public partial class UserMessage : ObservableObject, IConversationItem
+public class MessageFactory
 {
-    [ObservableProperty] private string _message = "";
-    [ObservableProperty] private bool _isCurrent;
+    public IConversationItem CreateBotMessage() => new BotMessage { Message = "", IsCurrent = true };
+    public IConversationItem CreateUserMessage(string message) => new UserMessage { Message = message, IsCurrent = true};
+    public IConversationItem CreateClearContextMessage() => new ClearContextMessage { Message = "Context Cleared" };
 }

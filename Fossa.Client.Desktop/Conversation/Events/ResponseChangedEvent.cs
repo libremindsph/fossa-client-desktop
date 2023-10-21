@@ -20,13 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using CommunityToolkit.Mvvm.ComponentModel;
-using Fossa.Client.Desktop.Conversation.Interfaces;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 
-namespace Fossa.Client.Desktop.Conversation.Entities;
+namespace Fossa.Client.Desktop.Conversation.Events;
 
-public partial class UserMessage : ObservableObject, IConversationItem
+public class ResponseChangedEvent : ValueChangedMessage<bool>
 {
-    [ObservableProperty] private string _message = "";
-    [ObservableProperty] private bool _isCurrent;
+    public ResponseChangedEvent(bool value) : base(value)
+    {
+    }
 }

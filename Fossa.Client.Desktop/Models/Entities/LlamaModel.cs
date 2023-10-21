@@ -28,6 +28,22 @@ namespace Fossa.Client.Desktop.Models.Entities;
 public class LlamaModel
 {
     public string Name { get; set; }
+    public string Description { get; set; }
     public string DownloadSource { get; set; }
-    public ModelConfig Config { get; set; }
+    public string FileName { get; set; }
+    public string FileSize { get; set; }
+    public string ParameterSize { get; set; }
+
+    public string Prompt { get; set; }
+    public int ContextSize { get; set; }
+    public bool Perplexity { get; set; }
+    public int TopK { get; set; }
+    public float TopP { get; set; }
+    public float TypicalP { get; set; }
+    public float TfsZ { get; set; }
+    public float RepeatPenalty { get; set; }
+    public float Temperature { get; set; }
+    public float FrequencyPenalty { get; set; }
+    public float PresencePenalty { get; set; }
+    public string SessionsDirectory { get; set; }
 }

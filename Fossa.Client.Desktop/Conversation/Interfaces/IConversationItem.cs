@@ -25,4 +25,5 @@ namespace Fossa.Client.Desktop.Conversation.Interfaces;
 public interface IConversationItem
 {
     string Message { get; set; }
+    bool IsCurrent { get; set; }
 }
