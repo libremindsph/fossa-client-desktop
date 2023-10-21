@@ -26,7 +26,7 @@ namespace Fossa.Client.Desktop.Configuration;
 
 public class AppConfig : ConfigProvider
 {
-    public AppConfig(string path) : base(path)
+    public AppConfig() : base("appconfig.json")
     {
     }
 
@@ -34,5 +34,11 @@ public class AppConfig : ConfigProvider
     {
         get => GetValue<string>(nameof(ModelsDirectory));
         set => SetValue(nameof(ModelsDirectory), value);
+    }
+
+    public int Threads
+    {
+        get => GetValue<int>(nameof(Threads));
+        set => SetValue(nameof(Threads), value);
     }
 }
