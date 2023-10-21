@@ -20,15 +20,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-namespace Fossa.Configuration.Interfaces;
+using System;
+using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Fossa.Client.Desktop.Services;
 
-public interface IModelConfig
+namespace Fossa.Client.Desktop.ViewModels;
+
+public partial class AppViewModel : ObservableObject
 {
-    string Name { get; set; }
-    string Path { get; set; }
-    string Prompt { get; set; }
-    int NThreads { get; set; }
-    int NCtx { get; set; }
-    bool LogitsAll { get; set; }
-    bool Verbose { get; set; }
+    private readonly ViewFactory _viewFactory;
+    [ObservableProperty] private bool _isOnWindows;
+    [ObservableProperty] private ChatViewModel _pageContext;
+
+    public AppViewModel(ChatViewModel pageContext, ViewFactory viewFactory)
+    {
+        _viewFactory = viewFactory;
+        PageContext = pageContext;
+        IsOnWindows = Environment.OSVersion.Platform is PlatformID.Win32NT;
+    }
+
+    [RelayCommand]
+    private async Task OpenModelManager()
+    {
+        await _viewFactory.CreateModelView(this);
+    }
 }

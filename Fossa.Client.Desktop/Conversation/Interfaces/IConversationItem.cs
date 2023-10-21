@@ -20,20 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using Fossa.Configuration.Interfaces;
-using Russkyc.Configuration;
+namespace Fossa.Client.Desktop.Conversation.Interfaces;
 
-namespace Fossa.Configuration;
-
-public class AppConfig : ConfigProvider, IAppConfig
+public interface IConversationItem
 {
-    public AppConfig(string path) : base(path)
-    {
-    }
-
-    public string ModelsDirectory
-    {
-        get => GetValue<string>(nameof(ModelsDirectory));
-        set => SetValue(nameof(ModelsDirectory), value);
-    }
+    string Message { get; set; }
 }

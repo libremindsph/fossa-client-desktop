@@ -20,27 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using FluentAssertions;
-using Fossa.Configuration.Factory;
+using Fossa.Client.Desktop.Conversation.Interfaces;
 
-namespace Fossa.Tests.Configuration;
+namespace Fossa.Client.Desktop.Conversation.Entities;
 
-public class AppConfigTests
+public class ClearContextMessage : IConversationItem
 {
-    [Fact]
-    void CreateAndUpdateAppConfig()
-    {
-        // Arrange
-        var config = ConfigFactory.CreateAppConfig("app.json");
-        var modelsPath = "/models";
-        
-        // Act
-        config.ModelsDirectory = modelsPath;
-        
-        // Assert
-        config.ModelsDirectory.Should()
-            .NotBeEmpty();
-        config.ModelsDirectory.Should()
-            .BeEquivalentTo(modelsPath);
-    }
+    public string Message { get; set; }
 }

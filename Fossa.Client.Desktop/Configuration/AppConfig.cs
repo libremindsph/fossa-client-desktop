@@ -20,27 +20,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using Fossa.Configuration.Factory;
-using Fossa.Configuration.Interfaces;
+using Russkyc.Configuration;
 
-namespace Fossa.Tests.ModelManager;
+namespace Fossa.Client.Desktop.Configuration;
 
-public class ModelManagerTests
+public class AppConfig : ConfigProvider
 {
-    private readonly IAppConfig _config = ConfigFactory.CreateAppConfig("app.json");
-    
-    [Fact]
-    void GetAllDownloadableModels()
+    public AppConfig(string path) : base(path)
     {
-        // Arrange
-        var config = ConfigFactory.CreateAppConfig(_config);
-        var modelManager = new ModelManager(config);
+    }
 
-        // Act
-        IEnumerable<Model> models = modelManager.GetDownloadableModels();
-
-        // Assert
-        models.Should()
-            .NotBeEmpty();
+    public string ModelsDirectory
+    {
+        get => GetValue<string>(nameof(ModelsDirectory));
+        set => SetValue(nameof(ModelsDirectory), value);
     }
 }

@@ -20,9 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-namespace Fossa.Configuration.Interfaces;
+using Fossa.Client.Desktop.Conversation.Interfaces;
 
-public interface IAppConfig
+namespace Fossa.Client.Desktop.Conversation.Entities;
+
+public class BotMessage : IConversationItem
 {
-    string ModelsDirectory { get; set; }
+    public string Message { get; set; }
 }

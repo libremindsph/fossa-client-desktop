@@ -20,36 +20,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using FluentAssertions;
-using Fossa.Configuration.Factory;
+using System.Collections.Generic;
+using System.Linq;
+using Fossa.Client.Desktop.Configuration;
+using Fossa.Client.Desktop.Models.Entities;
 
-namespace Fossa.Tests.Configuration;
+namespace Fossa.Client.Desktop.Models;
 
-public class ModelConfigTests
+public class ModelProvider
 {
+    private readonly AppConfig _config;
 
-    [Fact]
-    void CreateAndUpdateModelConfig()
+    public ModelProvider(AppConfig config)
     {
-        // Arrange
-        var config = ConfigFactory.CreateModelConfig("model.json");
-        var path = "model.gguf";
-        var verbose = false;
-        var nThreads = 1;
+        _config = config;
+    }
 
-        // Act
-        config.Path = path;
-        config.Verbose = verbose;
-        config.NThreads = nThreads;
-
-        // Assert
-        config.Path.Should()
-            .NotBeEmpty();
-        config.Path.Should()
-            .BeEquivalentTo(path);
-        config.Verbose.Should()
-            .BeFalse();
-        config.NThreads.Should()
-            .Be(1);
+    public IEnumerable<LlamaModel> GetDownloadableModels()
+    {
+        return Enumerable.Empty<LlamaModel>();
     }
 }

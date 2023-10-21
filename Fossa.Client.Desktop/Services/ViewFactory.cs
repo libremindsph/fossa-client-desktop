@@ -20,56 +20,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using Fossa.Configuration.Interfaces;
-using Russkyc.Configuration;
+using System.Linq;
+using System.Threading.Tasks;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Threading;
+using Fossa.Client.Desktop.ViewModels;
+using Fossa.Client.Desktop.Views.Windows;
 
-namespace Fossa.Configuration;
+namespace Fossa.Client.Desktop.Services;
 
-public class ModelConfig : ConfigProvider, IModelConfig
+public class ViewFactory
 {
-    public ModelConfig(string path) : base(path)
+    public async Task CreateModelView(AppViewModel viewModel)
     {
-    }
-
-    public string Name
-    {
-        get => GetValue<string>(nameof(Name));
-        set => SetValue(nameof(Name), value);
-    }
-
-    public string Path
-    {
-        get => GetValue<string>(nameof(Path));
-        set => SetValue(nameof(Path), value);
-    }
-
-    public string Prompt
-    {
-        get => GetValue<string>(nameof(Prompt));
-        set => SetValue(nameof(Prompt), value);
-    }
-    
-    public int NThreads
-    {
-        get => GetValue<int>(nameof(NThreads));
-        set => SetValue(nameof(NThreads), value);
-    }
-
-    public int NCtx
-    {
-        get => GetValue<int>(nameof(NCtx));
-        set => SetValue(nameof(NCtx), value);
-    }
-
-    public bool LogitsAll
-    {
-        get => GetValue<bool>(nameof(LogitsAll));
-        set => SetValue(nameof(LogitsAll), value);
-    }
-
-    public bool Verbose
-    {
-        get => GetValue<bool>(nameof(Verbose));
-        set => SetValue(nameof(Verbose), value);
+        if (Avalonia.Application.Current!.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            return;
+        }
+        Dispatcher.UIThread.Post(() =>
+        {
+            if (desktop.MainWindow is null || desktop.Windows.OfType<ModelManager>().Any())
+            {
+                return;
+            }
+            new ModelManager(viewModel).Show(desktop.MainWindow);
+        });
+        await Task.CompletedTask;
     }
 }
