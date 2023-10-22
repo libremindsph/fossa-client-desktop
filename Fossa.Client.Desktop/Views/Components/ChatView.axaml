@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:components="clr-namespace:Fossa.Client.Desktop.Views.Components"
     xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+    xmlns:converters="clr-namespace:Fossa.Client.Desktop.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:entities="clr-namespace:Fossa.Client.Desktop.Conversation.Entities"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -28,7 +29,7 @@
                             Background="{DynamicResource AccentButtonBackground}"
                             CornerRadius="7">
                             <Grid>
-                                <TextBlock Text="{Binding Message}" TextWrapping="Wrap" />
+                                <TextBlock Text="{Binding Message, Converter={x:Static converters:TextToTrimmedConverter.Instance}}" TextWrapping="Wrap" />
                             </Grid>
                         </Border>
                         <Button
