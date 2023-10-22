@@ -28,7 +28,7 @@
             Orientation="Horizontal">
             <TextBlock VerticalAlignment="Center" Text="You are talking to" />
             <ComboBox
-                Margin="8,0,12,0"
+                Margin="8,0,8,0"
                 HorizontalAlignment="Right"
                 IsEnabled="{Binding PageContext.CanSend}"
                 ItemsSource="{Binding Models}"
@@ -40,6 +40,13 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <Button
+                Width="{Binding Height, RelativeSource={RelativeSource Self}}"
+                Margin="4,0,12,0"
+                VerticalAlignment="Stretch"
+                IsEnabled="False">
+                <controls:SymbolIcon FontSize="16" Symbol="Settings" />
+            </Button>
         </StackPanel>
     </Grid>
 </UserControl>

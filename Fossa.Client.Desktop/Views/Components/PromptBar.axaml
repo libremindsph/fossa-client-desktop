@@ -19,6 +19,7 @@
             AcceptsReturn="True"
             IsEnabled="{Binding CanSend}"
             Text="{Binding Prompt, Mode=TwoWay}"
+            TextWrapping="Wrap"
             Watermark="Ask Anything.. (Use Ctrl+Enter for for new lines)">
             <TextBox.KeyBindings>
                 <KeyBinding Command="{Binding ChatCommand}" Gesture="Enter" />
