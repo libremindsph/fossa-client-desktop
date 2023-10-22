@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-namespace Fossa.Client.Desktop.Models.Entities;
+namespace Fossa.Client.Desktop.Llama.Entities;
 
 public class LlamaModel
 {

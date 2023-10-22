@@ -24,13 +24,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.Messaging.Messages;
 using Fossa.Client.Desktop.Configuration;
-using Fossa.Client.Desktop.Models.Entities;
+using Fossa.Client.Desktop.Llama.Entities;
 using LLama;
 using LLama.Common;
 
-namespace Fossa.Client.Desktop.Models;
+namespace Fossa.Client.Desktop.Llama;
 
 public class LlamaClient
 {

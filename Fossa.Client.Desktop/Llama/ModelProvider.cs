@@ -21,10 +21,10 @@
 // SOFTWARE.
 
 using System.Collections.Generic;
-using Fossa.Client.Desktop.Models.Entities;
+using Fossa.Client.Desktop.Llama.Entities;
 using JsonFlatFileDataStore;
 
-namespace Fossa.Client.Desktop.Models;
+namespace Fossa.Client.Desktop.Llama;
 
 public class ModelProvider
 {

@@ -28,10 +28,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Fossa.Client.Desktop.Configuration;
 using Fossa.Client.Desktop.Extensions;
-using Fossa.Client.Desktop.Models;
-using Fossa.Client.Desktop.Models.Entities;
+using Fossa.Client.Desktop.Llama;
+using Fossa.Client.Desktop.Llama.Entities;
 using Fossa.Client.Desktop.Services;
-using JsonFlatFileDataStore;
 
 namespace Fossa.Client.Desktop.ViewModels;
 

@@ -28,8 +28,8 @@ using CommunityToolkit.Mvvm.Messaging;
 using Fossa.Client.Desktop.Conversation.Events;
 using Fossa.Client.Desktop.Conversation.Factory;
 using Fossa.Client.Desktop.Conversation.Interfaces;
-using Fossa.Client.Desktop.Models;
-using Fossa.Client.Desktop.Models.Entities;
+using Fossa.Client.Desktop.Llama;
+using Fossa.Client.Desktop.Llama.Entities;
 
 namespace Fossa.Client.Desktop.ViewModels;
 
@@ -87,12 +87,17 @@ public partial class ChatViewModel : ObservableObject
         var response = _messageFactory.CreateBotMessage();
         
         ConversationItems.Add(_messageFactory.CreateUserMessage(prompt));
-        ConversationItems.Add(response);
 
         await Task.Run(async () =>
         {
             CanSend = false;
             Prompt = string.Empty;
+            
+            // Simulate response delay
+            await Task.Delay(500);
+            
+            ConversationItems.Add(response);
+            WeakReferenceMessenger.Default.Send(new ResponseChangedEvent(false));
             
             await foreach (var text in _llamaClient.ChatAsync(prompt))
             {

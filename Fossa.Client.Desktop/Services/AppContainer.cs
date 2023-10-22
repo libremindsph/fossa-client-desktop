@@ -22,7 +22,7 @@
 
 using Fossa.Client.Desktop.Configuration;
 using Fossa.Client.Desktop.Conversation.Factory;
-using Fossa.Client.Desktop.Models;
+using Fossa.Client.Desktop.Llama;
 using Fossa.Client.Desktop.Views.Windows;
 using StrongInject;
 using Fossa.Client.Desktop.ViewModels;
