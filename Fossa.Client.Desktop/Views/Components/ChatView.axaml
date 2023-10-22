@@ -22,6 +22,25 @@
             <ItemsControl.DataTemplates>
                 <DataTemplate DataType="{x:Type entities:BotMessage}">
                     <StackPanel Margin="12,12,100,12" HorizontalAlignment="Left">
+                        <StackPanel.Styles>
+                            <Style Selector="StackPanel">
+                                <Style.Animations>
+                                    <Animation FillMode="Forward" Duration="0:0:0.3">
+                                        <Animation.Easing>
+                                            <CubicEaseOut />
+                                        </Animation.Easing>
+                                        <KeyFrame Cue="0%">
+                                            <Setter Property="Opacity" Value="0" />
+                                            <Setter Property="TranslateTransform.Y" Value="10" />
+                                        </KeyFrame>
+                                        <KeyFrame Cue="100%">
+                                            <Setter Property="Opacity" Value="1" />
+                                            <Setter Property="TranslateTransform.Y" Value="0" />
+                                        </KeyFrame>
+                                    </Animation>
+                                </Style.Animations>
+                            </Style>
+                        </StackPanel.Styles>
                         <Border
                             MaxWidth="700"
                             Padding="12"
@@ -40,7 +59,27 @@
                             CornerRadius="5"
                             IsEnabled="{Binding !((viewModels:ChatViewModel)DataContext).CanSend, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type components:ChatView}}}"
                             IsVisible="{Binding IsCurrent}">
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Classes.is-animated="{Binding !((viewModels:ChatViewModel)DataContext).CanSend, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type components:ChatView}}}" Orientation="Horizontal">
+                                <StackPanel.Styles>
+                                    <Style Selector="StackPanel.is-animated">
+                                        <Style.Animations>
+                                            <Animation
+                                                IterationCount="INFINITE"
+                                                PlaybackDirection="Alternate"
+                                                Duration="0:0:1">
+                                                <Animation.Easing>
+                                                    <CubicEaseInOut />
+                                                </Animation.Easing>
+                                                <KeyFrame Cue="0%">
+                                                    <Setter Property="Opacity" Value="1" />
+                                                </KeyFrame>
+                                                <KeyFrame Cue="100%">
+                                                    <Setter Property="Opacity" Value="0.5" />
+                                                </KeyFrame>
+                                            </Animation>
+                                        </Style.Animations>
+                                    </Style>
+                                </StackPanel.Styles>
                                 <controls:SymbolIcon FontSize="16" Symbol="Stop" />
                                 <TextBlock
                                     Margin="4,0,0,0"
@@ -58,6 +97,30 @@
                         HorizontalAlignment="Right"
                         Background="{DynamicResource SystemControlPageBackgroundBaseLowBrush}"
                         CornerRadius="7">
+                        <Border.Transitions>
+                            <Transitions>
+                                <DoubleTransition Property="Height" Duration="0:0:0.3" />
+                            </Transitions>
+                        </Border.Transitions>
+                        <Border.Styles>
+                            <Style Selector="Border">
+                                <Style.Animations>
+                                    <Animation FillMode="Forward" Duration="0:0:0.3">
+                                        <Animation.Easing>
+                                            <CubicEaseOut />
+                                        </Animation.Easing>
+                                        <KeyFrame Cue="0%">
+                                            <Setter Property="Opacity" Value="0" />
+                                            <Setter Property="TranslateTransform.Y" Value="10" />
+                                        </KeyFrame>
+                                        <KeyFrame Cue="100%">
+                                            <Setter Property="Opacity" Value="1" />
+                                            <Setter Property="TranslateTransform.Y" Value="0" />
+                                        </KeyFrame>
+                                    </Animation>
+                                </Style.Animations>
+                            </Style>
+                        </Border.Styles>
                         <Grid>
                             <TextBlock Text="{Binding Message}" TextWrapping="Wrap" />
                         </Grid>

@@ -15,14 +15,72 @@
     <Design.DataContext>
         <viewModels:ChatViewModel />
     </Design.DataContext>
-    <Grid RowDefinitions="*,Auto,Auto">
+    <Grid RowDefinitions="*,Auto,Auto,Auto">
         <components:ChatView Grid.Row="0" DataContext="{Binding}" />
-        <ProgressBar
+        <Grid
             Grid.Row="1"
+            Background="#FF993A"
+            Classes.has-notification="{Binding IsHeavyModel}"
+            Classes.no-notification="{Binding !IsHeavyModel}"
+            Opacity="0">
+            <Grid.Styles>
+                <Style Selector="Grid.no-notification">
+                    <Style.Animations>
+                        <Animation FillMode="Forward" Duration="0:0:0.3">
+                            <Animation.Easing>
+                                <CubicEaseOut />
+                            </Animation.Easing>
+                            <KeyFrame Cue="0%">
+                                <Setter Property="Opacity" Value="1" />
+                                <Setter Property="TranslateTransform.Y" Value="0" />
+                            </KeyFrame>
+                            <KeyFrame Cue="100%">
+                                <Setter Property="Opacity" Value="0" />
+                                <Setter Property="TranslateTransform.Y" Value="10" />
+                            </KeyFrame>
+                        </Animation>
+                    </Style.Animations>
+                </Style>
+                <Style Selector="Grid.has-notification">
+                    <Style.Animations>
+                        <Animation FillMode="Forward" Duration="0:0:0.3">
+                            <Animation.Easing>
+                                <CubicEaseOut />
+                            </Animation.Easing>
+                            <KeyFrame Cue="0%">
+                                <Setter Property="Opacity" Value="0" />
+                                <Setter Property="TranslateTransform.Y" Value="10" />
+                            </KeyFrame>
+                            <KeyFrame Cue="100%">
+                                <Setter Property="Opacity" Value="1" />
+                                <Setter Property="TranslateTransform.Y" Value="0" />
+                            </KeyFrame>
+                        </Animation>
+                    </Style.Animations>
+                </Style>
+            </Grid.Styles>
+            <StackPanel
+                Margin="3"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <controls:SymbolIcon
+                    FontSize="16"
+                    Foreground="#ffffff"
+                    Symbol="AlertUrgentFilled" />
+                <TextBlock
+                    Margin="4,0,0,0"
+                    VerticalAlignment="Center"
+                    Foreground="#ffffff"
+                    Text="You might experience lower performance when using a 13B model." />
+            </StackPanel>
+        </Grid>
+        <ProgressBar
+            Grid.Row="2"
             Height="2"
             HorizontalAlignment="Stretch"
             Background="Transparent"
             IsIndeterminate="{Binding !CanSend}" />
-        <components:PromptBar Grid.Row="2" DataContext="{Binding}" />
+        <components:PromptBar Grid.Row="3" DataContext="{Binding}" />
     </Grid>
 </UserControl>
