@@ -1,24 +1,29 @@
 {
   "llamaModel": [
     {
-      "name": "Llama 2 7b (GGUF)",
+      "name": "Llama 7B",
       "description": "Simple Tasks, Conversational",
-      "downloadSource": "https://huggingface.co/TheBloke/llama-2-7B-Guanaco-QLoRA-GGUF/resolve/main/llama-2-7b-guanaco-qlora.Q3_K_L.gguf",
-      "fileName": "llama-2-7b-guanaco-qlora.Q4_0.gguf",
+      "downloadSource": "https://huggingface.co/TheBloke/Wizard-Vicuna-7B-Uncensored-GGUF/resolve/main/Wizard-Vicuna-7B-Uncensored.Q2_K.gguf",
+      "fileName": "llama-2-7b.Q2_K.gguf",
       "fileSize": "4GB",
       "parameterSize" : "7 Billion",
-      "prompt": null,
-      "threads": 2,
-      "contextSize": 4096,
-      "perplexity": false,
-      "tfsZ": 0.25,
-      "topK": 40,
-      "topP": 1.0,
-      "typicalP": 1.0,
-      "temperature": 0.7,
-      "repeatPenalty": 1.0,
-      "frequencyPenalty": 0.42,
-      "presencePenalty": 0.3,
+      "prompt": "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: {prompt} ASSISTANT:",
+      "contextSize": 2048,
+      "temperature": 0.80,
+      "repeatPenalty": 1.1,
+      "sessionsDirectory": null
+    },
+    {
+      "name": "Mistral 7B",
+      "description": "Simple Tasks, Conversational",
+      "downloadSource": "https://huggingface.co/TheBloke/Wizard-Vicuna-7B-Uncensored-GGUF/resolve/main/Wizard-Vicuna-7B-Uncensored.Q2_K.gguf",
+      "fileName": "arithmo-mistral-7b.Q2_K.gguf",
+      "fileSize": "4GB",
+      "parameterSize" : "7 Billion",
+      "prompt": "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: {prompt} ASSISTANT:",
+      "contextSize": 2048,
+      "temperature": 0.80,
+      "repeatPenalty": 1.1,
       "sessionsDirectory": null
     }
   ]

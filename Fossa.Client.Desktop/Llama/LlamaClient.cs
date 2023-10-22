@@ -20,8 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Fossa.Client.Desktop.Configuration;
@@ -37,7 +37,7 @@ public class LlamaClient
     private LlamaModel? _model;
     private ChatSession? _chatSession;
     private LLamaContext _context = null!;
-    private InteractiveExecutor? _executor;
+    private InstructExecutor? _executor;
     private CancellationTokenSource? _stopResponseTokenSource;
 
     public LlamaClient(AppConfig appConfig)
@@ -52,9 +52,10 @@ public class LlamaClient
         {
             var parameters = new ModelParams(_appConfig.ModelsDirectory + _model.FileName)
             {
+                Encoding = Encoding.UTF8,
+                GpuLayerCount = -1,
                 Threads = _appConfig.Threads,
-                ContextSize = _model.ContextSize,
-                Perplexity = _model.Perplexity
+                ContextSize = _model.ContextSize
             };
             _context = LLamaWeights.LoadFromFile(parameters)
                 .CreateContext(parameters);
@@ -69,21 +70,20 @@ public class LlamaClient
 
         await foreach (var text in _chatSession.ChatAsync(prompt,
                            new InferenceParams 
-                           { 
+                           {
+                               MirostatTau = 5.0f,
+                               MirostatEta = 0.10f,
+                               TopP = 0.95f,
+                               MaxTokens = -1,
+                               TopK = 40,
+                               RepeatLastTokensCount = 64,
+                               PresencePenalty = 0.0f,
                                Temperature = _model!.Temperature,
-                               TfsZ = _model!.TfsZ,
-                               TopK = _model.TopK,
-                               RepeatPenalty = _model.RepeatPenalty,
-                               TopP = _model.TopP,
-                               TypicalP = _model.TypicalP,
-                               FrequencyPenalty = _model.FrequencyPenalty,
-                               PresencePenalty = _model.PresencePenalty,
-                               AntiPrompts = new List<string> { "User:" } 
+                               RepeatPenalty = _model.RepeatPenalty
                            }, _stopResponseTokenSource.Token))
         {
-            yield return text;
+            yield return text.Replace(">","");
         }
-        _chatSession.SaveSession($"{AppDomain.CurrentDomain.BaseDirectory}/sessions");
     }
 
     public void StopResponse()

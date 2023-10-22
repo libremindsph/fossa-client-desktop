@@ -33,14 +33,7 @@ public class LlamaModel
 
     public string Prompt { get; set; }
     public int ContextSize { get; set; }
-    public bool Perplexity { get; set; }
-    public int TopK { get; set; }
-    public float TopP { get; set; }
-    public float TypicalP { get; set; }
-    public float TfsZ { get; set; }
     public float RepeatPenalty { get; set; }
     public float Temperature { get; set; }
-    public float FrequencyPenalty { get; set; }
-    public float PresencePenalty { get; set; }
     public string SessionsDirectory { get; set; }
 }
