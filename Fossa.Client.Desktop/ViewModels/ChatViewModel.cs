@@ -20,6 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -40,8 +41,10 @@ public partial class ChatViewModel : ObservableObject
 
     [ObservableProperty] private string _prompt = "";
     [ObservableProperty] private bool _canSend = true;
-    [ObservableProperty] private LlamaModel? _model;
     [ObservableProperty] private ObservableCollection<IConversationItem> _conversationItems = new();
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(IsHeavyModel))] private LlamaModel? _model;
+
+    public bool IsHeavyModel => Model.Name.Contains("13b", StringComparison.InvariantCultureIgnoreCase);
 
     public ChatViewModel(
         MessageFactory messageFactory,
