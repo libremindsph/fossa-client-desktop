@@ -22,7 +22,7 @@
       "parameterSize" : "7 Billion",
       "prompt": "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: {prompt} ASSISTANT:",
       "contextSize": 2048,
-      "temperature": 0.80,
+      "temperature": 0.70,
       "repeatPenalty": 1.1,
       "sessionsDirectory": null
     }
