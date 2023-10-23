@@ -8,6 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:entities="clr-namespace:Fossa.Client.Desktop.Conversation.Entities"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdxaml="https://github.com/whistyun/Markdown.Avalonia"
     xmlns:viewModels="clr-namespace:Fossa.Client.Desktop.ViewModels"
     d:DesignWidth="400"
     x:DataType="viewModels:ChatViewModel"
@@ -48,7 +49,15 @@
                             Background="{DynamicResource SystemControlPageBackgroundBaseLowBrush}"
                             CornerRadius="7">
                             <Grid>
-                                <TextBlock Text="{Binding Message, Converter={x:Static converters:TextToTrimmedConverter.Instance}}" TextWrapping="Wrap" />
+                                <TextBlock
+                                    IsVisible="{Binding IsCurrent}"
+                                    Text="{Binding Message, Converter={x:Static converters:TextToTrimmedConverter.Instance}}"
+                                    TextWrapping="Wrap" />
+                                <!--  For now markdown only renders after the message is completed, markdown update animations are distracting  -->
+                                <mdxaml:MarkdownScrollViewer
+                                    IsVisible="{Binding !IsCurrent}"
+                                    Markdown="{Binding Message, Converter={x:Static converters:TextToTrimmedConverter.Instance}}"
+                                    Transitions="{x:Null}" />
                             </Grid>
                         </Border>
                         <Button
@@ -122,7 +131,7 @@
                             </Style>
                         </Border.Styles>
                         <Grid>
-                            <TextBlock Text="{Binding Message}" TextWrapping="Wrap" />
+                            <mdxaml:MarkdownScrollViewer Markdown="{Binding Message}" Transitions="{x:Null}" />
                         </Grid>
                     </Border>
                 </DataTemplate>

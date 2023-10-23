@@ -20,6 +20,7 @@
         <PackageReference Include="fluentavaloniaui" Version="2.0.4" />
         <PackageReference Include="LLamaSharp" Version="0.5.1" />
         <PackageReference Include="LLamaSharp.Backend.Cpu" Version="0.5.1" />
+        <PackageReference Include="Markdown.Avalonia" Version="11.0.2" />
         <PackageReference Include="Russkyc.Configuration" Version="1.0.1" />
         <PackageReference Include="StrongInject" Version="1.4.4" />
     </ItemGroup>
