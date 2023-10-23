@@ -45,7 +45,7 @@
                             MaxWidth="700"
                             Padding="12"
                             HorizontalAlignment="Left"
-                            Background="{DynamicResource AccentButtonBackground}"
+                            Background="{DynamicResource SystemControlPageBackgroundBaseLowBrush}"
                             CornerRadius="7">
                             <Grid>
                                 <TextBlock Text="{Binding Message, Converter={x:Static converters:TextToTrimmedConverter.Instance}}" TextWrapping="Wrap" />
@@ -95,7 +95,7 @@
                         Margin="100,12,12,12"
                         Padding="12"
                         HorizontalAlignment="Right"
-                        Background="{DynamicResource SystemControlPageBackgroundBaseLowBrush}"
+                        Background="{DynamicResource AccentButtonBackground}"
                         CornerRadius="7">
                         <Border.Transitions>
                             <Transitions>
