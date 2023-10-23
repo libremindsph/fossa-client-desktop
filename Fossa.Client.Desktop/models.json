@@ -1,7 +1,7 @@
 {
   "llamaModel": [
     {
-      "name": "Arthimo Mistral 7B",
+      "name": "Arithmo Mistral 7B",
       "description": "Simple tasks, conversational, lower memory consumption",
       "downloadSource": "https://huggingface.co/TheBloke/Arithmo-Mistral-7B-GGUF/resolve/main/arithmo-mistral-7b.Q2_K.gguf",
       "fileName": "arithmo-mistral-7b.Q2_K.gguf",
