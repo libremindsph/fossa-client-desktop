@@ -6,33 +6,22 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:Fossa.Client.Desktop.ViewModels"
+    xmlns:converters="clr-namespace:Fossa.Client.Desktop.Converters"
     d:DesignWidth="500"
     x:DataType="viewModels:AppViewModel"
     mc:Ignorable="d">
-    <Design.DataContext>
-        <viewModels:AppViewModel />
-    </Design.DataContext>
-    <Grid>
-        <Button Margin="12,0,0,0" Command="{Binding OpenModelManagerCommand}">
-            <StackPanel Orientation="Horizontal">
-                <controls:SymbolIcon FontSize="16" Symbol="Repair" />
-                <TextBlock
-                    Margin="4,0,0,0"
-                    VerticalAlignment="Center"
-                    Text="Manage Models" />
-            </StackPanel>
-        </Button>
-        <StackPanel
-            Margin="0,8"
-            HorizontalAlignment="Right"
-            Orientation="Horizontal">
-            <TextBlock VerticalAlignment="Center" Text="You are talking to" />
+    <Grid ColumnDefinitions="Auto, *, Auto">
+        <StackPanel Grid.Column="0"
+                    IsVisible="{Binding PageContext, Converter={x:Static converters:TypeComparisonToBoolConverter.Instance}, ConverterParameter={x:Type viewModels:ChatViewModel}, Mode=OneWay}"
+                    Margin="12,8"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
             <ComboBox
-                Margin="8,0,8,0"
+                Margin="0,0,8,0"
                 HorizontalAlignment="Right"
-                IsEnabled="{Binding PageContext.CanSend}"
+                IsEnabled="{Binding ((viewModels:ChatViewModel)PageContext).CanSend}"
                 ItemsSource="{Binding Models}"
-                SelectedValue="{Binding PageContext.Model}"
+                SelectedValue="{Binding ((viewModels:ChatViewModel)PageContext).Model}"
                 SelectedValueBinding="{Binding}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -47,6 +36,30 @@
                 IsEnabled="False">
                 <controls:SymbolIcon FontSize="16" Symbol="Settings" />
             </Button>
+        </StackPanel>
+        <StackPanel Margin="12,8" Orientation="Horizontal" Grid.Column="2">
+            <RadioButton CornerRadius="5,0,0,5" Theme="{DynamicResource {x:Type ToggleButton}}" IsChecked="{Binding PageContext, Converter={x:Static converters:TypeComparisonToBoolConverter.Instance}, ConverterParameter={x:Type viewModels:ChatViewModel}, Mode=OneWay}" Margin="12,0,0,0" Command="{Binding OpenChatCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <controls:SymbolIcon FontSize="16" Symbol="Message"
+                                         Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType=RadioButton}}" />
+                    <TextBlock
+                        Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType=RadioButton}}"
+                        Margin="4,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="Chat" />
+                </StackPanel>
+            </RadioButton>
+            <RadioButton CornerRadius="0,5,5,0" Theme="{DynamicResource {x:Type ToggleButton}}" IsChecked="{Binding PageContext, Converter={x:Static converters:TypeComparisonToBoolConverter.Instance}, ConverterParameter={x:Type viewModels:ModelManagerViewModel}, Mode=OneWay}" Command="{Binding OpenModelManagerCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <controls:SymbolIcon FontSize="16" Symbol="Repair"
+                                         Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType=RadioButton}}" />
+                    <TextBlock
+                        Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType=RadioButton}}"
+                        Margin="4,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="Models" />
+                </StackPanel>
+            </RadioButton>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -6,9 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:Fossa.Client.Desktop.ViewModels"
+    xmlns:components="clr-namespace:Fossa.Client.Desktop.Views.Components"
     d:DesignHeight="450"
     d:DesignWidth="400"
-    x:DataType="viewModels:AppViewModel"
+    x:DataType="viewModels:ModelManagerViewModel"
     Background="{DynamicResource SystemControlBackgroundChromeBlackLowBrush}"
     mc:Ignorable="d">
     <ScrollViewer>
@@ -20,60 +21,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border
-                        Margin="12,12,12,0"
-                        Padding="12"
-                        HorizontalAlignment="Stretch"
-                        Background="{DynamicResource ButtonBackgroundPressed}"
-                        CornerRadius="5">
-                        <Grid ColumnDefinitions="*,120">
-                            <StackPanel Grid.Column="0">
-                                <TextBlock
-                                    FontSize="16"
-                                    FontWeight="Medium"
-                                    Text="{Binding Name}" />
-                                <TextBlock
-                                    Margin="0,4,0,0"
-                                    FontSize="12"
-                                    Foreground="#B4B4B4"
-                                    Text="{Binding Description}" />
-                                <StackPanel Margin="0,16,0,0" Orientation="Horizontal">
-                                    <Border
-                                        Padding="7,3"
-                                        Background="{DynamicResource ButtonBackground}"
-                                        CornerRadius="5">
-                                        <TextBlock FontSize="10" Text="{Binding ParameterSize}" />
-                                    </Border>
-                                    <Border
-                                        Margin="6,0,0,0"
-                                        Padding="7,3"
-                                        Background="{DynamicResource ButtonBackground}"
-                                        CornerRadius="5">
-                                        <TextBlock FontSize="10" Text="{Binding FileSize}" />
-                                    </Border>
-                                </StackPanel>
-                            </StackPanel>
-                            <Button
-                                Grid.Column="1"
-                                Margin="8,0,0,0"
-                                Padding="6"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Center"
-                                Classes="accent">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock
-                                        Margin="0,0,4,0"
-                                        VerticalAlignment="Center"
-                                        Foreground="#ffffff"
-                                        Text="Download" />
-                                    <controls:SymbolIcon
-                                        FontSize="16"
-                                        Foreground="#ffffff"
-                                        Symbol="Download" />
-                                </StackPanel>
-                            </Button>
-                        </Grid>
-                    </Border>
+                    <components:ModelCard/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

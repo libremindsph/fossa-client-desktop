@@ -20,8 +20,8 @@
         <Grid
             Grid.Row="1"
             Background="#FF993A"
-            Classes.has-notification="{Binding IsHeavyModel}"
-            Classes.no-notification="{Binding !IsHeavyModel}"
+            Classes.has-notification="{Binding  Model.Heavy}"
+            Classes.no-notification="{Binding !Model.Heavy}"
             Opacity="0">
             <Grid.Styles>
                 <Style Selector="Grid.no-notification">

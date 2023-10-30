@@ -20,22 +20,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using Avalonia;
-using Avalonia.Controls;
-using Fossa.Client.Desktop.ViewModels;
+using System;
+using System.Globalization;
+using Avalonia.Data.Converters;
 
-namespace Fossa.Client.Desktop.Views.Windows;
+namespace Fossa.Client.Desktop.Converters;
 
-public partial class ModelManager : Window
+public class TypeComparisonToBoolConverter : IValueConverter
 {
-    public ModelManager()
+    public static readonly TypeComparisonToBoolConverter Instance = new();
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        InitializeComponent();
+        if (value is null
+            || parameter is null
+            || parameter is not Type type) return false;
+
+        return value.GetType() == type;
     }
 
-    public ModelManager(AppViewModel vm)
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        DataContext = vm;
-        InitializeComponent();
+        throw new NotImplementedException();
     }
 }
