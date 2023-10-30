@@ -22,6 +22,7 @@
 
 using Fossa.Client.Desktop.Configuration;
 using Fossa.Client.Desktop.Conversation.Factory;
+using Fossa.Client.Desktop.Downloader;
 using Fossa.Client.Desktop.Llama;
 using Fossa.Client.Desktop.Views.Windows;
 using StrongInject;
@@ -31,12 +32,14 @@ using Fossa.Client.Desktop.Views.Pages;
 namespace Fossa.Client.Desktop.Services;
 
 [Register<AppConfig>]
+[Register<DownloadManager>]
 [Register<LlamaClient>]
 [Register<MessageFactory>]
 [Register<ModelProvider>]
-[Register<ViewFactory>]
+[Register<DialogFactory>]
 [Register<AppViewModel>]
 [Register<ChatViewModel>]
+[Register<ModelManagerViewModel>]
 [Register<Main>]
 [Register<ChatPage>]
 public partial class AppContainer : IContainer<Main>

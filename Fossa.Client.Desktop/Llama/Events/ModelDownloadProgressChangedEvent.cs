@@ -20,22 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using Avalonia;
-using Avalonia.Controls;
-using Fossa.Client.Desktop.ViewModels;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 
-namespace Fossa.Client.Desktop.Views.Windows;
+namespace Fossa.Client.Desktop.Llama.Events;
 
-public partial class ModelManager : Window
+public class ModelDownloadProgressChangedEvent : ValueChangedMessage<(string, double)>
 {
-    public ModelManager()
+    public ModelDownloadProgressChangedEvent((string, double) value) : base(value)
     {
-        InitializeComponent();
-    }
-
-    public ModelManager(AppViewModel vm)
-    {
-        DataContext = vm;
-        InitializeComponent();
     }
 }

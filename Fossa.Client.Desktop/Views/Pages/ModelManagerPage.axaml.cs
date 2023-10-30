@@ -20,22 +20,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Collections.Generic;
-using Fossa.Client.Desktop.Llama.Entities;
-using JsonFlatFileDataStore;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 
-namespace Fossa.Client.Desktop.Llama;
+namespace Fossa.Client.Desktop.Views.Pages;
 
-public class ModelProvider
+public partial class ModelManagerPage : UserControl
 {
-    private readonly IDocumentCollection<LlamaModel> _dataStore = new DataStore("models.json").GetCollection<LlamaModel>();
-
-    public IEnumerable<LlamaModel> GetDownloadableModels()
+    public ModelManagerPage()
     {
-        foreach (var llamaModel in _dataStore.AsQueryable())
-        {
-            yield return llamaModel;
-        }
+        InitializeComponent();
     }
-
 }

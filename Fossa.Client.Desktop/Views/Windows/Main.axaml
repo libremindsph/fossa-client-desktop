@@ -17,21 +17,21 @@
     ExtendClientAreaToDecorationsHint="{Binding IsOnWindows}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Window.KeyBindings>
-        <KeyBinding Command="{Binding PageContext.StopGeneratingCommand}" Gesture="Ctrl+Shift+E" />
-    </Window.KeyBindings>
-    <Design.DataContext>
-        <viewModels:ChatViewModel />
-    </Design.DataContext>
     <Grid RowDefinitions="Auto,Auto,*">
         <components:TitleBar Grid.Row="0" IsVisible="{Binding IsOnWindows}" />
         <components:TopBar Grid.Row="1" DataContext="{Binding}" />
-        <ContentPresenter Grid.Row="2" Content="{Binding PageContext}">
-            <ContentPresenter.ContentTemplate>
-                <DataTemplate>
+        <TransitioningContentControl Grid.Row="2" Content="{Binding PageContext}">
+            <TransitioningContentControl.PageTransition>
+                <CrossFade Duration="0:0:0.10" />
+            </TransitioningContentControl.PageTransition>
+            <TransitioningContentControl.DataTemplates>
+                <DataTemplate DataType="{x:Type viewModels:ChatViewModel}">
                     <pages:ChatPage />
                 </DataTemplate>
-            </ContentPresenter.ContentTemplate>
-        </ContentPresenter>
+                <DataTemplate DataType="{x:Type viewModels:ModelManagerViewModel}">
+                    <pages:ModelManagerPage />
+                </DataTemplate>
+            </TransitioningContentControl.DataTemplates>
+        </TransitioningContentControl>
     </Grid>
 </windowing:AppWindow>

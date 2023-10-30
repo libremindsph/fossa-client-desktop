@@ -20,22 +20,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Collections.Generic;
-using Fossa.Client.Desktop.Llama.Entities;
-using JsonFlatFileDataStore;
+using System;
+using System.Globalization;
+using Avalonia.Data.Converters;
 
-namespace Fossa.Client.Desktop.Llama;
+namespace Fossa.Client.Desktop.Converters;
 
-public class ModelProvider
+public class TypeComparisonToBoolConverter : IValueConverter
 {
-    private readonly IDocumentCollection<LlamaModel> _dataStore = new DataStore("models.json").GetCollection<LlamaModel>();
-
-    public IEnumerable<LlamaModel> GetDownloadableModels()
+    public static readonly TypeComparisonToBoolConverter Instance = new();
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        foreach (var llamaModel in _dataStore.AsQueryable())
-        {
-            yield return llamaModel;
-        }
+        if (value is null
+            || parameter is null
+            || parameter is not Type type) return false;
+
+        return value.GetType() == type;
     }
 
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
 }

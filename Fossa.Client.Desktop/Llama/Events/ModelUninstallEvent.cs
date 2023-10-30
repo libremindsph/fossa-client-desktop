@@ -20,31 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Linq;
-using System.Threading.Tasks;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Threading;
-using Fossa.Client.Desktop.ViewModels;
-using Fossa.Client.Desktop.Views.Windows;
+using CommunityToolkit.Mvvm.Messaging.Messages;
+using Fossa.Client.Desktop.Llama.Entities;
 
-namespace Fossa.Client.Desktop.Services;
+namespace Fossa.Client.Desktop.Llama.Events;
 
-public class ViewFactory
+public class ModelUninstallEvent : ValueChangedMessage<LlamaModel>
 {
-    public async Task CreateModelView(AppViewModel viewModel)
+    public ModelUninstallEvent(LlamaModel value) : base(value)
     {
-        if (Avalonia.Application.Current!.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop)
-        {
-            return;
-        }
-        Dispatcher.UIThread.Post(() =>
-        {
-            if (desktop.MainWindow is null || desktop.Windows.OfType<ModelManager>().Any())
-            {
-                return;
-            }
-            new ModelManager(viewModel).Show(desktop.MainWindow);
-        });
-        await Task.CompletedTask;
     }
 }

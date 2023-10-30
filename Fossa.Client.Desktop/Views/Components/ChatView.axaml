@@ -13,6 +13,9 @@
     d:DesignWidth="400"
     x:DataType="viewModels:ChatViewModel"
     mc:Ignorable="d">
+    <UserControl.KeyBindings>
+        <KeyBinding Command="{Binding StopGeneratingCommand}" Gesture="Ctrl+Shift+E" />
+    </UserControl.KeyBindings>
     <ScrollViewer x:Name="ChatViewScroller" AllowAutoHide="True">
         <ItemsControl ItemsSource="{Binding ConversationItems}">
             <ItemsControl.ItemsPanel>

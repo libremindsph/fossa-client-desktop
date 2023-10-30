@@ -11,20 +11,22 @@
       "contextSize": 2048,
       "temperature": 0.70,
       "repeatPenalty": 1.1,
-      "sessionsDirectory": null
+      "sessionsDirectory": null,
+      "heavy": false
     },
     {
       "name": "Amethyst Mistral 13B",
       "description": "More accuracy, advance tasks, higher memory consumption",
       "downloadSource": "https://huggingface.co/TheBloke/Amethyst-13B-Mistral-GGUF/resolve/main/amethyst-13b-mistral.Q2_K.gguf",
-      "fileName": "amethyst-13b-mistral.Q2_K.gguf",
+      "fileName": "amethyst-mistral-13b.Q2_K.gguf",
       "fileSize": "5.43GB",
       "parameterSize" : "13 Billion",
       "prompt": "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: {prompt} ASSISTANT:",
       "contextSize": 2048,
       "temperature": 0.80,
       "repeatPenalty": 1.1,
-      "sessionsDirectory": null
+      "sessionsDirectory": null,
+      "heavy": true
     }
   ]
 }

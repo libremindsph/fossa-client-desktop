@@ -20,7 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -31,42 +30,57 @@ using Fossa.Client.Desktop.Conversation.Factory;
 using Fossa.Client.Desktop.Conversation.Interfaces;
 using Fossa.Client.Desktop.Llama;
 using Fossa.Client.Desktop.Llama.Entities;
+using Fossa.Client.Desktop.Llama.Events;
+using Fossa.Client.Desktop.Services;
 
 namespace Fossa.Client.Desktop.ViewModels;
 
 public partial class ChatViewModel : ObservableObject
 {
     private readonly LlamaClient _llamaClient;
+    private readonly DialogFactory _dialogFactory;
     private readonly MessageFactory _messageFactory;
 
     [ObservableProperty] private string _prompt = "";
     [ObservableProperty] private bool _canSend = true;
     [ObservableProperty] private ObservableCollection<IConversationItem> _conversationItems = new();
-    [ObservableProperty] [NotifyPropertyChangedFor(nameof(IsHeavyModel))] private LlamaModel? _model;
-
-    public bool IsHeavyModel => Model.Name.Contains("13b", StringComparison.InvariantCultureIgnoreCase);
+    [ObservableProperty] private LlamaModel? _model;
 
     public ChatViewModel(
+        DialogFactory dialogFactory,
         MessageFactory messageFactory,
         LlamaClient llamaClient)
     {
         _messageFactory = messageFactory;
         _llamaClient = llamaClient;
+        _dialogFactory = dialogFactory;
+
+        WeakReferenceMessenger.Default
+            .Register<ModelChangedEvent>(this, OnLlamaModelChanged);
+        WeakReferenceMessenger.Default
+            .Register<ModelLoadFailedEvent>(this, OnLlamaLoadFailed);
+    }
+
+    private void OnLlamaLoadFailed(object recipient, ModelLoadFailedEvent message)
+    {
+        Model = message.OldValue;
+    }
+
+    private void OnLlamaModelChanged(object recipient, ModelChangedEvent message)
+    {
+        Model = message.Value;
     }
 
     partial void OnModelChanged(LlamaModel? oldValue, LlamaModel? newValue)
     {
-        if (newValue is null || oldValue! == newValue)
-        {
-            return;
-        }
+        if (newValue is null || oldValue! == newValue) return;
+        
         Task.Run(async () =>
         {
             CanSend = false;
-            
-            await _llamaClient.LoadModelAsync(newValue);
-            await Task.Delay(1000);
-            
+
+            await _llamaClient.LoadModelAsync(newValue, oldValue);
+
             CanSend = true;
             WeakReferenceMessenger.Default.Send(new ResponseChangedEvent(true));
         });
@@ -79,19 +93,16 @@ public partial class ChatViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task ChatAsync()
+    private Task ChatAsync()
     {
-        if (string.IsNullOrWhiteSpace(Prompt) || Prompt.Length < 2)
-        {
-            return;
-        }
+        if (string.IsNullOrWhiteSpace(Prompt) || Prompt.Length < 2) return Task.CompletedTask;
         
         var prompt = Prompt;
         var response = _messageFactory.CreateBotMessage();
         
         ConversationItems.Add(_messageFactory.CreateUserMessage(prompt));
 
-        await Task.Run(async () =>
+        return Task.Run(async () =>
         {
             CanSend = false;
             Prompt = string.Empty;
@@ -108,8 +119,8 @@ public partial class ChatViewModel : ObservableObject
                 WeakReferenceMessenger.Default.Send(new ResponseChangedEvent(false));
             }
             
-            response.IsCurrent = false;
             CanSend = true;
+            response.IsCurrent = false;
             WeakReferenceMessenger.Default.Send(new ResponseChangedEvent(true));
         });
     }
