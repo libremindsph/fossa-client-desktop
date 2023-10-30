@@ -20,12 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia.Threading;
+using CommunityToolkit.Mvvm.Messaging;
 using Fossa.Client.Desktop.Configuration;
 using Fossa.Client.Desktop.Llama.Entities;
+using Fossa.Client.Desktop.Llama.Events;
+using Fossa.Client.Desktop.Services;
 using LLama;
 using LLama.Common;
 
@@ -34,20 +39,23 @@ namespace Fossa.Client.Desktop.Llama;
 public class LlamaClient
 {
     private readonly AppConfig _appConfig;
+    private readonly DialogFactory _dialogFactory;
     private LlamaModel? _model;
     private ChatSession? _chatSession;
     private LLamaContext _context = null!;
     private InstructExecutor? _executor;
     private CancellationTokenSource? _stopResponseTokenSource;
 
-    public LlamaClient(AppConfig appConfig)
+    public LlamaClient(AppConfig appConfig, DialogFactory dialogFactory)
     {
         _appConfig = appConfig;
+        _dialogFactory = dialogFactory;
     }
 
-    public async Task LoadModelAsync(LlamaModel model)
+    public async Task LoadModelAsync(LlamaModel model, LlamaModel? oldModel)
     {
         _model = model;
+        
         await Task.Run(() =>
         {
             var parameters = new ModelParams(_appConfig.ModelsDirectory + _model.FileName)
@@ -57,9 +65,18 @@ public class LlamaClient
                 Threads = _appConfig.Threads,
                 ContextSize = _model.ContextSize
             };
-            _context = LLamaWeights.LoadFromFile(parameters)
-                .CreateContext(parameters);
-        });
+            try
+            {
+                _context = LLamaWeights.LoadFromFile(parameters)
+                    .CreateContext(parameters);
+            }
+            catch (Exception e)
+            {
+                Dispatcher.UIThread.InvokeAsync(() => _dialogFactory.CreateModelFailedToLoadDialog(model.Name));
+                WeakReferenceMessenger.Default.Send(new ModelLoadFailedEvent(oldModel, model));
+            }
+        }, new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token);
+        
     }
 
     public async IAsyncEnumerable<string> ChatAsync(string prompt)
@@ -88,10 +105,8 @@ public class LlamaClient
 
     public void StopResponse()
     {
-        if (_stopResponseTokenSource is null || _stopResponseTokenSource.IsCancellationRequested)
-        {
-            return;
-        }
+        if (_stopResponseTokenSource is null
+            || _stopResponseTokenSource.IsCancellationRequested) return;
         _stopResponseTokenSource.Cancel();
         _stopResponseTokenSource.Dispose();
     }

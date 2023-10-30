@@ -23,45 +23,77 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Fossa.Client.Desktop.Configuration;
+using CommunityToolkit.Mvvm.Messaging;
 using Fossa.Client.Desktop.Extensions;
 using Fossa.Client.Desktop.Llama;
 using Fossa.Client.Desktop.Llama.Entities;
+using Fossa.Client.Desktop.Llama.Events;
 using Fossa.Client.Desktop.Services;
 
 namespace Fossa.Client.Desktop.ViewModels;
 
 public partial class AppViewModel : ObservableObject
 {
-    private readonly AppConfig _appConfig;
-    private readonly ViewFactory _viewFactory;
+    private readonly DialogFactory _dialogFactory;
+    private readonly ModelProvider _modelProvider;
+    private readonly ChatViewModel _chatViewModel;
+    private readonly ModelManagerViewModel _modelManagerViewModel;
 
-    [ObservableProperty] private ChatViewModel _pageContext;
+    [ObservableProperty] private ObservableObject _pageContext;
     [ObservableProperty] private ObservableCollection<LlamaModel> _models = new();
     [ObservableProperty] private bool _isOnWindows = Environment.OSVersion.Platform is PlatformID.Win32NT;
 
     public AppViewModel(
+        DialogFactory dialogFactory,
         ModelProvider modelProvider,
         ChatViewModel pageContext,
-        ViewFactory viewFactory,
-        AppConfig appConfig)
+        ChatViewModel chatViewModel,
+        ModelManagerViewModel modelManagerViewModel)
     {
+        _dialogFactory = dialogFactory;
+        _modelProvider = modelProvider;
+        _chatViewModel = chatViewModel;
+        _modelManagerViewModel = modelManagerViewModel;
+
         PageContext = pageContext;
-        _viewFactory = viewFactory;
-        _appConfig = appConfig;
-        Models = modelProvider.GetDownloadableModels().ToObservableCollection();
-        Task.Run(async () =>
-        {
-            await Task.Run(() => PageContext.Model = Models.FirstOrDefault());
-        });
+
+        Models = _modelProvider.GetDownloadableModels()
+            .ToObservableCollection();
+        
+        WeakReferenceMessenger.Default
+            .Send(new ModelChangedEvent(Models.First()));
+        WeakReferenceMessenger.Default
+            .Register<OpenModelManagerEvent>(this, OnOpenModelManager);
+        WeakReferenceMessenger.Default
+            .Register<ModelDownloadCompletedEvent>(this, OnModelDownloadCompleted);
+        
+        OpenChat();
     }
 
     [RelayCommand]
-    private async Task OpenModelManager()
+    private void OpenModelManager()
     {
-        await _viewFactory.CreateModelView(this);
+        PageContext = _modelManagerViewModel;
     }
+
+    [RelayCommand]
+    private void OpenChat()
+    {
+        PageContext = _chatViewModel;
+    }
+    
+    private void OnModelDownloadCompleted(object recipient, ModelDownloadCompletedEvent message)
+    {
+        if (Models.Count(model => model.Installed) > 1) return;
+        WeakReferenceMessenger.Default
+            .Send(new ModelChangedEvent(Models.First()));
+    }
+
+    private void OnOpenModelManager(object recipient, OpenModelManagerEvent message)
+    {
+        OpenModelManager();
+    }
+
 }

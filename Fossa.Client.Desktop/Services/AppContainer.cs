@@ -36,9 +36,10 @@ namespace Fossa.Client.Desktop.Services;
 [Register<LlamaClient>]
 [Register<MessageFactory>]
 [Register<ModelProvider>]
-[Register<ViewFactory>]
+[Register<DialogFactory>]
 [Register<AppViewModel>]
 [Register<ChatViewModel>]
+[Register<ModelManagerViewModel>]
 [Register<Main>]
 [Register<ChatPage>]
 public partial class AppContainer : IContainer<Main>

@@ -20,22 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Collections.Generic;
-using Fossa.Client.Desktop.Llama.Entities;
-using JsonFlatFileDataStore;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 
-namespace Fossa.Client.Desktop.Llama;
+namespace Fossa.Client.Desktop.Llama.Events;
 
-public class ModelProvider
+public class ModelDownloadProgressChangedEvent : ValueChangedMessage<(string, double)>
 {
-    private readonly IDocumentCollection<LlamaModel> _dataStore = new DataStore("models.json").GetCollection<LlamaModel>();
-
-    public IEnumerable<LlamaModel> GetDownloadableModels()
+    public ModelDownloadProgressChangedEvent((string, double) value) : base(value)
     {
-        foreach (var llamaModel in _dataStore.AsQueryable())
-        {
-            yield return llamaModel;
-        }
     }
-
 }

@@ -20,6 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
 using System.Threading.Tasks;
 using Downloader;
 using Fossa.Client.Desktop.Configuration;
@@ -29,21 +30,28 @@ namespace Fossa.Client.Desktop.Downloader;
 public class DownloadManager
 {
     private readonly AppConfig _appConfig;
-    private readonly IDownloadService _downloader;
+    private readonly DownloadConfiguration _configuration;
 
     public DownloadManager(AppConfig appConfig)
     {
         _appConfig = appConfig;
-        _downloader = new DownloadService(new DownloadConfiguration
+        _configuration = new DownloadConfiguration
         {
             ChunkCount = 8,
             ParallelDownload = true,
-            ReserveStorageSpaceBeforeStartingDownload = true
-        });
+            ClearPackageOnCompletionWithFailure = true,
+            ReserveStorageSpaceBeforeStartingDownload = false
+        };
     }
 
-    public async Task DownloadAsync(string url, string filename)
+    public async Task DownloadAsync(string url, string filename, Action<string> started, Action<string> completed, Action<(string, double)> progressChanged)
     {
-        await _downloader.DownloadFileTaskAsync(url, $"{_appConfig.ModelsDirectory}{filename}");
+        using var downloadService = new DownloadService(_configuration);
+        
+        downloadService.DownloadStarted += (_,_) => started(filename);
+        downloadService.DownloadFileCompleted += (_, _) => completed(filename);
+        downloadService.DownloadProgressChanged += (_, args) => progressChanged((filename,args.ProgressPercentage));
+        
+        await downloadService.DownloadFileTaskAsync(url, _appConfig.ModelsDirectory + filename);
     }
 }
