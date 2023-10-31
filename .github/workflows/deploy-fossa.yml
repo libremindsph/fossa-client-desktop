@@ -9,6 +9,7 @@ env:
   DOTNET_VERSION: "net7.0-windows" 
   FILE_NAME: "fossa-standalone-${{ github.ref_name }}.zip"
 
+# TODO: add a step to create executable/msi for windows
 jobs:
   deploy:
     runs-on: windows-latest
@@ -46,7 +47,7 @@ jobs:
         with:
           tag_name: ${{ github.ref_name }}
           release_name: ${{ github.ref_name }}
-          body_path: changelog.md 
+          body_path: changelog.md # TODO: add changelog.md
 
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
