@@ -14,6 +14,7 @@
         <entry key="Fossa.Client.Desktop/Views/Pages/Chat.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
         <entry key="Fossa.Client.Desktop/Views/Pages/ChatPage.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
         <entry key="Fossa.Client.Desktop/Views/Pages/ModelManagerPage.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
+        <entry key="Fossa.Client.Desktop/Views/Pages/SettingsPage.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
         <entry key="Fossa.Client.Desktop/Views/Windows/Main.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
         <entry key="Fossa.Client.Desktop/Views/Windows/MainWindow.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
         <entry key="Fossa.Client.Desktop/Views/Windows/ModelManager.axaml" value="Fossa.Client.Desktop/Fossa.Client.Desktop.csproj" />
