@@ -38,6 +38,7 @@ namespace Fossa.Client.Desktop.Services;
 [Register<ModelProvider>]
 [Register<DialogFactory>]
 [Register<AppViewModel>]
+[Register<SettingsViewModel>]
 [Register<ChatViewModel>]
 [Register<ModelManagerViewModel>]
 [Register<Main>]
