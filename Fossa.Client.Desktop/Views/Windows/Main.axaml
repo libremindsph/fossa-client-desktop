@@ -25,6 +25,9 @@
                 <CrossFade Duration="0:0:0.10" />
             </TransitioningContentControl.PageTransition>
             <TransitioningContentControl.DataTemplates>
+                <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
+                    <pages:SettingsPage />
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type viewModels:ChatViewModel}">
                     <pages:ChatPage />
                 </DataTemplate>
