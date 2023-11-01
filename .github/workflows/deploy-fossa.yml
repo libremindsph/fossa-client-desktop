@@ -5,7 +5,7 @@ on:
       - "*.*.*"
 
 env:
-  PROJECT_PATH: "Fossa/Fossa.Client.Desktop.csproj"
+  PROJECT_PATH: "Fossa.Client.Desktop/Fossa.Client.Desktop.csproj"
   DOTNET_VERSION: "net7.0-windows" 
   FILE_NAME: "fossa-standalone-${{ github.ref_name }}.zip"
 
