@@ -29,6 +29,7 @@ DisableProgramGroupPage=yes
 LicenseFile=LICENSE
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
+OutputDir=D:\a\fossa-client-desktop\fossa-client-desktop/Fossa.Client.Desktop/Output
 OutputBaseFilename=FossaSetup
 SetupIconFile={#MyAppIconURL}
 Compression=lzma
