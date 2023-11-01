@@ -6,7 +6,7 @@ on:
 
 env:
   PROJECT_PATH: "Fossa.Client.Desktop/Fossa.Client.Desktop.csproj"
-  DOTNET_VERSION: "net7.0-windows" 
+  DOTNET_VERSION: "net7.0" 
   FILE_NAME: "fossa-standalone-${{ github.ref_name }}.zip"
 
 # TODO: add a step to create executable/msi for windows
