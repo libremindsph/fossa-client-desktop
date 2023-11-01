@@ -6,6 +6,8 @@ LLaMA 2 language model. It works offline, runs on native UI, and works
 on Mac, Windows, and Linux.
 </p>
 
+[![Deploy Fossa](https://github.com/libremindsph/fossa-client-desktop/actions/workflows/deploy-fossa.yml/badge.svg)](https://github.com/libremindsph/fossa-client-desktop/actions/workflows/deploy-fossa.yml)
+
 <img src="https://raw.githubusercontent.com/libremindsph/fossa-client-desktop/master/Resources/fossa-ai-screenshot.png" style="width: 100%;" />
 
 ## Contributors
