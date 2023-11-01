@@ -33,7 +33,6 @@ Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
 VersionInfoOriginalFileName={#MyAppVersion}
-VersionInfoVersion={#MyAppVersion}
 UninstallDisplayIcon={#MyAppIconURL}
 SetupMutex=SetupMutex{#SetupSetting("AppId")}
 
