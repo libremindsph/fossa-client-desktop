@@ -66,4 +66,27 @@ public class DialogFactory
             IsSecondaryButtonEnabled = false
         }.ShowAsync();
     }
+    
+    public Task<ContentDialogResult> CreateInstallUpdateDialog(string title, string message)
+    {
+        return new ContentDialog
+        {
+            Title = $"{title}",
+            Content = $"{message}",
+            PrimaryButtonText = "Yes",
+            CloseButtonText = "Cancel",
+            IsSecondaryButtonEnabled = false
+        }.ShowAsync();
+    }
+    
+    public Task<ContentDialogResult> CreateInfoDialog(string title, string message)
+    {
+        return new ContentDialog
+        {
+            Title = $"{title}",
+            Content = $"{message}",
+            PrimaryButtonText = "Ok",
+            IsSecondaryButtonEnabled = false
+        }.ShowAsync();
+    }
 }
