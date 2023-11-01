@@ -29,10 +29,17 @@ jobs:
       - name: Publish the project
         run: dotnet publish ${{ env.PROJECT_PATH }} -c Release -r win-x64 --self-contained -p:PublishReadyToRun=true -p:PublishSingleFile=true -p:DeleteExistingFiles=true
 
+      - name: Set up Inno Setup
+        run: |
+          echo "::set-env name=MY_APP_VERSION::${{ github.ref_name }}"
+        shell: bash
+
       - name: Building the installer
         run: |
-          "%programfiles(x86)%\Inno Setup 6\iscc.exe" "installer_script.iss"
+          "%programfiles(x86)%\Inno Setup 6\iscc.exe" "/DMyAppVersion={MY_APP_VERSION}" "installer_script.iss"
         shell: cmd
+        env:
+          MY_APP_VERSION: ${{ env.MY_APP_VERSION }}
       
       - name: Upload the installer as an artifact
         uses: actions/upload-artifact@v2
