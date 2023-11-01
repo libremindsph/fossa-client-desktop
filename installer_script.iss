@@ -2,7 +2,6 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Fossa"
-#define MyAppVersion "1.0.7"
 #define MyAppPublisher "Libre Minds"
 #define MyAppURL "https://github.com/libremindsph"
 #define MyAppExeName "Fossa.Client.Desktop.exe"
