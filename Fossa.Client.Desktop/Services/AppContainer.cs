@@ -24,6 +24,7 @@ using Fossa.Client.Desktop.Configuration;
 using Fossa.Client.Desktop.Conversation.Factory;
 using Fossa.Client.Desktop.Downloader;
 using Fossa.Client.Desktop.Llama;
+using Fossa.Client.Desktop.Services.Updater;
 using Fossa.Client.Desktop.Views.Windows;
 using StrongInject;
 using Fossa.Client.Desktop.ViewModels;
@@ -36,6 +37,7 @@ namespace Fossa.Client.Desktop.Services;
 [Register<LlamaClient>]
 [Register<MessageFactory>]
 [Register<ModelProvider>]
+[Register<GithubUpdater>]
 [Register<DialogFactory>]
 [Register<AppViewModel>]
 [Register<SettingsViewModel>]
