@@ -30,7 +30,7 @@ jobs:
 
       - name: Zip Files
         run: |
-          Compress-Archive -Path ${{ github.workspace }}/Fossa.Client.Desktop/bin/Release/${{ env.DOTNET_VERSION }}/win-x64/publish/* -DestinationPath ${{ github.workspace }}/Fossa/${{ env.FILE_NAME }}
+          Compress-Archive -Path ${{ github.workspace }}\Fossa.Client.Desktop\bin\Release\${{ env.DOTNET_VERSION }}\win-x64\publish\* -DestinationPath ${{ github.workspace }}/Fossa/${{ env.FILE_NAME }}
 
       - name: Deploy Update File
         id: deploy_artifacts
