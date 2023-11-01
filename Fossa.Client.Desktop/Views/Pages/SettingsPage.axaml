@@ -1,8 +1,8 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Fossa.Client.Desktop.ViewModels"
+             xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
              d:DesignHeight="450"
              d:DesignWidth="800"
              x:DataType="viewModels:SettingsViewModel"
@@ -11,5 +11,53 @@
     <Design.DataContext>
         <viewModels:SettingsViewModel />
     </Design.DataContext>
-    Welcome to Settings Page!
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto">
+
+        <TextBlock Text="Settings"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Margin="0 30"
+                   HorizontalAlignment="Center" />
+
+        <Button
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            Width="{Binding Height, RelativeSource={RelativeSource Self}}"
+            Margin="4 0 12 0"
+            VerticalAlignment="Stretch"
+            Command="{Binding CheckForUpdatesCommand}">
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                        Margin="0 0 4 0"
+                        VerticalAlignment="Center"
+                        Foreground="#ffffff"
+                        Text="Check for Updates" />
+                    <controls:SymbolIcon
+                        FontSize="16"
+                        Foreground="#ffffff"
+                        Symbol="Sync" />
+                </StackPanel>
+            </Grid>
+        </Button>
+
+        <TextBlock Grid.Row="2"
+                   Margin="0 15"
+                   HorizontalAlignment="Center"
+                   TextWrapping="Wrap">
+            <Span>
+                <Bold>Version: </Bold>
+                <Run Text="{Binding Version}" />
+            </Span>
+        </TextBlock>
+
+        <ProgressBar Grid.Row="3" Name="ProgressBar"
+                     Margin="10 8"
+                     Height="4"
+                     IsVisible="{Binding IsProcessing}"
+                     Background="Transparent"
+                     IsIndeterminate="{Binding IsCheckingForUpdates}"
+                     Value="{Binding DownloadProgress}"
+                     HorizontalAlignment="Stretch" />
+    </Grid>
 </UserControl>
