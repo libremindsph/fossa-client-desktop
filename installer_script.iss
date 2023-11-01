@@ -12,7 +12,7 @@
 #define MyAppIconURL "Resources\modern.ico"
 
 [Setup]
-AppId={{{#GeneratedAppId}}
+AppId={#GeneratedAppId}  
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName}
