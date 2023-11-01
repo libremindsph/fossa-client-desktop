@@ -38,6 +38,7 @@ public partial class AppViewModel : ObservableObject
 {
     private readonly DialogFactory _dialogFactory;
     private readonly ModelProvider _modelProvider;
+    private readonly SettingsViewModel _settingsViewModel;
     private readonly ChatViewModel _chatViewModel;
     private readonly ModelManagerViewModel _modelManagerViewModel;
 
@@ -48,16 +49,17 @@ public partial class AppViewModel : ObservableObject
     public AppViewModel(
         DialogFactory dialogFactory,
         ModelProvider modelProvider,
-        ChatViewModel pageContext,
+        SettingsViewModel settingsViewModel,
         ChatViewModel chatViewModel,
         ModelManagerViewModel modelManagerViewModel)
     {
         _dialogFactory = dialogFactory;
         _modelProvider = modelProvider;
+        _settingsViewModel = settingsViewModel;
         _chatViewModel = chatViewModel;
         _modelManagerViewModel = modelManagerViewModel;
 
-        PageContext = pageContext;
+        PageContext = _chatViewModel;
 
         Models = _modelProvider.GetDownloadableModels()
             .ToObservableCollection();
@@ -70,6 +72,12 @@ public partial class AppViewModel : ObservableObject
             .Register<ModelDownloadCompletedEvent>(this, OnModelDownloadCompleted);
         
         OpenChat();
+    }
+    
+    [RelayCommand]
+    private void OpenSettings()
+    {
+        PageContext = _settingsViewModel;
     }
 
     [RelayCommand]

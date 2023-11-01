@@ -33,7 +33,7 @@
                 Width="{Binding Height, RelativeSource={RelativeSource Self}}"
                 Margin="4,0,12,0"
                 VerticalAlignment="Stretch"
-                IsEnabled="False">
+                Command="{Binding OpenSettingsCommand}">
                 <controls:SymbolIcon FontSize="16" Symbol="Settings" />
             </Button>
         </StackPanel>

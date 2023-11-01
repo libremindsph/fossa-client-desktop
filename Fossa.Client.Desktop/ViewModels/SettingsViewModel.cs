@@ -20,30 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using Fossa.Client.Desktop.Configuration;
-using Fossa.Client.Desktop.Conversation.Factory;
-using Fossa.Client.Desktop.Downloader;
-using Fossa.Client.Desktop.Llama;
-using Fossa.Client.Desktop.Views.Windows;
-using StrongInject;
-using Fossa.Client.Desktop.ViewModels;
-using Fossa.Client.Desktop.Views.Pages;
+using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Fossa.Client.Desktop.Services;
+namespace Fossa.Client.Desktop.ViewModels;
 
-[Register<AppConfig>]
-[Register<DownloadManager>]
-[Register<LlamaClient>]
-[Register<MessageFactory>]
-[Register<ModelProvider>]
-[Register<DialogFactory>]
-[Register<AppViewModel>]
-[Register<SettingsViewModel>]
-[Register<ChatViewModel>]
-[Register<ModelManagerViewModel>]
-[Register<Main>]
-[Register<ChatPage>]
-public partial class AppContainer : IContainer<Main>
+public class SettingsViewModel : ObservableObject
 {
     
 }
