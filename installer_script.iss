@@ -12,9 +12,7 @@
 #define MyAppIconURL "Resources\modern.ico"
 
 [Setup]
-; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
-; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{6EB2AE21-782D-4FCF-B127-726DCDB17539}
+AppId={{#GeneratedAppId}}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName}
@@ -28,8 +26,8 @@ DisableProgramGroupPage=yes
 LicenseFile=LICENSE
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
-OutputDir=D:\a\fossa-client-desktop\fossa-client-desktop/Fossa.Client.Desktop/Output
-OutputBaseFilename="Fossa Setup"
+OutputDir={#InstallerOutputDir}
+OutputBaseFilename={#SetupFileName}
 SetupIconFile={#MyAppIconURL}
 Compression=lzma
 SolidCompression=yes
@@ -71,7 +69,7 @@ Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\a\fossa-client-desktop\fossa-client-desktop\Fossa.Client.Desktop\bin\Release\net7.0\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: {#SourceFiles}; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
