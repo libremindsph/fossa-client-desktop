@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Threading.Tasks;
+using Avalonia.Threading;
 using Onova;
 using Onova.Services;
 
@@ -10,7 +11,7 @@ public class GithubUpdater
 {
     private readonly IUpdateManager _updateManager = new UpdateManager(
         new GithubPackageResolver(
-                "libremindsph",
+            "libremindsph",
             "fossa-client-desktop",
             "fossa-standalone-*.zip"
         ),
@@ -38,10 +39,11 @@ public class GithubUpdater
         return ShouldUpdate(readCurrentVersion, _latestVersion) ? UpdateStatus.Available : UpdateStatus.NotAvailable;
     }
 
-    public async Task PerformUpdate(IProgress<double> progress)
+    public async Task PerformUpdate(IProgress<double> progress, Func<Task<bool>> callback)
     {
         if (_latestVersion is null) return;
         await _updateManager.PrepareUpdateAsync(_latestVersion, progress);
+        if (!await callback.Invoke()) return;
         await Task.Run(() => _updateManager.LaunchUpdater(_latestVersion));
         Environment.Exit(0);
     }
