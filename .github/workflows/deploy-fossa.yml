@@ -11,7 +11,7 @@ env:
   UPDATE_ASSET_FILE: "fossa-standalone-${{ github.ref_name }}.zip"
   SETUP_FILE_NAME: "Fossa Setup.exe"
   INSTALLER_OUTPUT_DIR: "${{ github.workspace }}/${{ env.PROJECT_NAME }}/Output"
-  PUBLISH_OUTPUT_DIR: "${{ github.workspace }}\${{ env.PROJECT_NAME }}\bin\Release\${{ env.DOTNET_VERSION }}\win-x64\publish\*"
+  PUBLISH_OUTPUT_DIR: "${{ github.workspace }}\\${{ env.PROJECT_NAME }}\\bin\\Release\\${{ env.DOTNET_VERSION }}\\win-x64\\publish\\*"
   
 # TODO: add a step to create executable/msi for windows
 jobs:
